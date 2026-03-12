@@ -30,13 +30,13 @@ export function About() {
 
         {/* Biography Text Content */}
         <div className="max-w-[600px] w-full space-y-8">
-          <p className="font-['Inter',sans-serif] text-lg leading-relaxed text-black tracking-tight">
+          <p className="font-['Inter',sans-serif] text-s leading-relaxed text-black opacity-70 tracking-tight uppercase">
             I’m Susanna, I’m Italian and I don’t like tomatoes. I like to think
             of myself as a curious and creative person. I like to constantly
             learn, and if I’m passionate about something, I’ll go ballistic
             about it.
           </p>
-          <p className="font-['Inter',sans-serif] text-lg leading-relaxed text-black tracking-tight">
+          <p className="font-['Inter',sans-serif] text-s leading-relaxed text-black opacity-70 tracking-tight uppercase">
             I like to create clean interfaces and pleasant aesthetics.
           </p>
         </div>
