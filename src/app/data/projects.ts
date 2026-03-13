@@ -2,21 +2,20 @@ import chrome51 from "../../assets/chrome51.svg";
 import cube6 from "../../assets/Cube6_Transparent.svg";
 import group134 from "../../assets/Group_134.svg";
 
-
 // Studio 3D Images
-import studio1 from "../../assets/Studio/Desktop - 74.png";
-import studio2 from "../../assets/Studio/Scan2026-03-03_102147 1.png";
-import studio3 from "../../assets/Studio//Scan2026-03-03_102317 1.png";
-import studio4 from "../../assets/Studio/Scan2026-03-03_102434 1.png";
-import studio5 from "../../assets/Studio/Screenshot 2026-01-20 at 17.25.45 1.png";
+import studio1 from "../../assets/Desktop - 74.png";
+import studio2 from "../../assets/Scan2026-03-03_102147 1.png";
+import studio3 from "../../assets/Scan2026-03-03_102317 1.png";
+import studio4 from "../../assets/Scan2026-03-03_102434 1.png";
+import studio5 from "../../assets/Screenshot 2026-01-20 at 17.25.45 1.png";
 
 // Platform Images
-import platform1 from "platform/Platformintegration2.png";
-import platform2 from "../../assets/platform/Platformintegration3.png"
-import platform3 from "../../assets/platform/platfintegr4.png";
-import platform4 from "../../assets/platform/platforeditor1.png";
-import platform5 from "../../assets/platform/platform1.png";
-import platform6 from "../../assets/platform/platftorm integration31.png";
+import platform1 from "../../assets/Platformintegration2.png";
+import platform2 from "../../assets/Platformintegration3.png";
+import platform3 from "../../assets/platfintegr4.png";
+import platform4 from "../../assets/platforeditor1.png";
+import platform5 from "../../assets/platform1.png";
+import platform6 from "../../assets/platftorm integration31.png";
 
 // Approach images placeholders for other projects
 import process1 from "../../assets/1.svg";
