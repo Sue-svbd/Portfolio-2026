@@ -11,12 +11,12 @@ import studio4 from "../../assets/Studio/Scan2026-03-03_102434 1.png";
 import studio5 from "../../assets/Studio/Screenshot 2026-01-20 at 17.25.45 1.png";
 
 // Platform Images
-import platform1 from "../../assets/platform/platf integr 4 1.png";
-import platform2 from "../../assets/platform/platform - use case 1.png";
-import platform3 from "../../assets/platform/platform editor 1.png";
-import platform4 from "../../assets/platform/Platform integration 2 1.png";
-import platform5 from "../../assets/platform/Platform integration 3.png";
-import platform6 from "../../assets/platform/platftorm integration 3 1.png";
+import platform1 from "../../assets/platform/Platformintegration2.png";
+import platform2 from "../../assets/platform/Platformintegration3.png"
+import platform3 from "../../assets/platform/platfintegr4.png";
+import platform4 from "../../assets/platform/platforeditor1.png";
+import platform5 from "../../assets/platform/platform1.png";
+import platform6 from "../../assets/platform/platftorm integration31.png";
 
 // Approach images placeholders for other projects
 import process1 from "../../assets/1.svg";
