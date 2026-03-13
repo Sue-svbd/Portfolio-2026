@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
-import * as path from "path";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
+import { fileURLToPath, URL } from "url";
 
 export default defineConfig({
   base: "/Portfolio-2026/",
@@ -14,7 +14,7 @@ export default defineConfig({
   resolve: {
     alias: {
       // Alias @ to the src directory
-      "@": new URL("./src", import.meta.url).pathname,
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
 
