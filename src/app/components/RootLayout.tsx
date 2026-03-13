@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { Outlet, Link, useLocation, useOutlet } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 
 // Preload critical assets
 import chrome51 from "../../assets/chrome51.svg";
@@ -70,6 +70,12 @@ export function RootLayout() {
   const outlet = useOutlet();
   const isHome = location.pathname === "/";
   const skipCurtain = location.state?.skipCurtain;
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Close menu on route change
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
 
   // Preload images once on mount
   useEffect(() => {
@@ -91,10 +97,10 @@ export function RootLayout() {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-black flex flex-col overflow-x-hidden">
+    <div className="min-h-screen bg-white text-black flex flex-col overflow-x-hidden relative">
       {/* Navigation */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 px-8 py-6 transition-colors duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-[100] px-8 py-6 transition-colors duration-300 ${
           isHome ? "bg-transparent" : "bg-white/90 backdrop-blur-sm border-b border-black/5"
         }`}
       >
@@ -129,15 +135,62 @@ export function RootLayout() {
               </div>
             )}
 
+            {/* Desktop Contact Button */}
             <a
               href="mailto:susannacapacchione@gmail.com"
-              className="flex items-center gap-2 text-[14px] font-medium tracking-[0.55px] border border-black px-6 py-2.5 hover:bg-black hover:text-white transition-all duration-300 group"
+              className="hidden md:flex items-center gap-2 text-[14px] font-medium tracking-[0.55px] border border-black px-6 py-2.5 hover:bg-black hover:text-white transition-all duration-300 group"
             >
               CONTACT <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
+
+            {/* Mobile Hamburger Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="flex md:hidden items-center justify-center border border-black p-2.5 hover:bg-black hover:text-white transition-all duration-300 z-[101]"
+            >
+              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
         </div>
       </nav>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 bg-white z-[90] md:hidden pt-32 px-8"
+          >
+            <div className="flex flex-col gap-8">
+              {navItems.map((item) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`font-['Zalando_Sans_Expanded',sans-serif] text-5xl font-bold tracking-tighter uppercase ${
+                      isActive ? "text-[#6951ff]" : "text-black"
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
+              <div className="mt-8 pt-8 border-t border-black/10">
+                <a
+                  href="mailto:susannacapacchione@gmail.com"
+                  className="font-['Inter',sans-serif] text-sm tracking-widest font-bold uppercase opacity-50 hover:opacity-100 transition-opacity"
+                >
+                  GET IN TOUCH
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Main Content with Integrated Curtain */}
       <main className={`flex-1 relative ${!isHome ? 'pt-[100px]' : ''}`}>

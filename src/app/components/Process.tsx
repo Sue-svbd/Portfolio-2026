@@ -36,6 +36,21 @@ function ProcessStep({ step, index }: { step: any; index: number }) {
   const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
   const imageY = useTransform(scrollYProgress, [0, 1], [-20, 20]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  
+  // New: Active state transforms based on scroll
+  // Background color transitions to purple when in the middle of the screen
+  const bgColor = useTransform(
+    scrollYProgress,
+    [0.3, 0.45, 0.55, 0.7],
+    ["#000000", "#614DD5", "#614DD5", "#000000"]
+  );
+
+  // Subtle scale up when active
+  const activeScale = useTransform(
+    scrollYProgress,
+    [0.3, 0.5, 0.7],
+    [1, 1.05, 1]
+  );
 
   return (
     <motion.div
@@ -47,12 +62,11 @@ function ProcessStep({ step, index }: { step: any; index: number }) {
       <div className={`col-span-6 ${index % 2 === 0 ? "order-1" : "order-2"}`}>
         <div className="relative group overflow-hidden bg-black">
           <motion.div
-            style={{ y: imageY }}
+            style={{ y: imageY, scale: activeScale }}
             className="aspect-square relative z-10 scale-110"
           >
             <motion.div
-              initial={{ backgroundColor: "#000000" }}
-              whileHover={{ backgroundColor: "#614DD5" }}
+              style={{ backgroundColor: bgColor }}
               transition={{ duration: 1, ease: "easeInOut" }}
               className="w-full h-full relative overflow-hidden"
             >
@@ -61,15 +75,13 @@ function ProcessStep({ step, index }: { step: any; index: number }) {
                 className="w-full h-full transform-gpu"
                 variants={distortionVariants}
               >
-                <motion.div
-                  className="w-full h-full"
-                >
+                <div className="w-full h-full">
                   <ImageWithFallback
                     src={step.image}
                     alt={step.title}
                     className="w-full h-full object-cover"
                   />
-                </motion.div>
+                </div>
               </motion.div>
             </motion.div>
           </motion.div>

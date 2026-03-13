@@ -137,7 +137,7 @@ export function Work() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="font-['Zalando_Sans_Expanded',sans-serif] font-bold text-[176px] leading-[0.7] tracking-tighter mb-8 uppercase"
+            className="font-['Zalando_Sans_Expanded',sans-serif] font-bold text-[74px] lg:text-[176px] leading-[0.7] tracking-tighter mb-8 uppercase"
           >
             SELECTED <br /> WORK
           </motion.h1>

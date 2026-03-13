@@ -25,7 +25,7 @@ export function About() {
           {/* "ABOUT" Text */}
           <motion.h1
             style={{ x: aboutX }}
-            className="absolute left-0 top-0 lg:top-10 font-['Zalando_Sans_Expanded',sans-serif] font-semibold text-[#6951ff] text-[12vw] lg:text-[250px] leading-none tracking-tighter select-none z-0"
+            className="absolute left-0 top-0 lg:top-10 font-['Zalando_Sans_Expanded',sans-serif] font-semibold text-[#6951ff] text-[24vw] lg:text-[250px] leading-none tracking-tighter select-none z-0"
           >
             ABOUT
           </motion.h1>
@@ -45,7 +45,7 @@ export function About() {
           {/* "ME" Text */}
           <motion.h1
             style={{ x: meX }}
-            className="absolute right-0 bottom-1/4 lg:bottom-1/3 font-['Zalando_Sans_Expanded',sans-serif] font-semibold text-[#6951ff] text-[12vw] lg:text-[250px] leading-none tracking-tighter select-none z-20"
+            className="absolute right-0 bottom-1/4 lg:bottom-1/3 font-['Zalando_Sans_Expanded',sans-serif] font-semibold text-[#6951ff] text-[24vw] lg:text-[250px] leading-none tracking-tighter select-none z-20"
           >
             ME
           </motion.h1>
@@ -74,6 +74,25 @@ export function About() {
             I like to create clean interfaces and pleasant aesthetics.
           </motion.p>
         </div>
+
+  <div className="text-center py-32">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 0.7 }}
+            className="text-xs tracking-wide mb-8"
+          >
+            INTERESTED IN WORKING TOGETHER?
+          </motion.p>
+          <motion.a
+            href="mailto:susannacapacchione@gmail.com"
+            whileHover={{ scale: 1.05, backgroundColor: "#000", color: "#fff" }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-block text-sm tracking-widest border border-black px-12 py-4 transition-all duration-300 uppercase font-bold"
+          >
+            LET'S TALK
+          </motion.a>
+        </div>
+
       </div>
     </div>
   );
