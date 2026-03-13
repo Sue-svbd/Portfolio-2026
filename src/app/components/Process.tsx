@@ -52,18 +52,20 @@ function ProcessStep({ step, index }: { step: any; index: number }) {
     [1, 1.05, 1]
   );
 
+  const isEven = index % 2 === 0;
+
   return (
     <motion.div
       ref={stepRef}
       style={{ opacity }}
-      className="grid grid-cols-12 gap-12 items-center"
+      className="grid grid-cols-12 gap-4 lg:gap-12 items-center"
     >
       {/* Image Container */}
-      <div className={`col-span-12 lg:col-span-6 ${index % 2 === 0 ? "order-1" : "order-2"}`}>
+      <div className={`col-span-5 lg:col-span-6 ${isEven ? "order-1 -ml-16 lg:ml-0" : "order-2 -mr-16 lg:mr-0"}`}>
         <div className="relative group overflow-hidden bg-black">
           <motion.div
             style={{ y: imageY, scale: activeScale }}
-            className="aspect-square relative z-10 scale-110"
+            className="aspect-[3/4] lg:aspect-square relative z-10 scale-110"
           >
             <motion.div
               style={{ backgroundColor: bgColor }}
@@ -89,16 +91,16 @@ function ProcessStep({ step, index }: { step: any; index: number }) {
       </div>
 
       {/* Content */}
-      <div className={`col-span-12 lg:col-span-6 ${index % 2 === 0 ? "order-2" : "order-1"}`}>
-        <motion.div style={{ y }} className="space-y-6">
-          <h2 className="text-4xl tracking-tight uppercase">{step.title}</h2>
-          <div className="flex items-center gap-4 pt-4">
-            <div className="w-12 h-0.5 bg-black"></div>
-            <p className="text-sm tracking-widest opacity-50">
+      <div className={`col-span-7 lg:col-span-6 ${isEven ? "order-2" : "order-1"}`}>
+        <motion.div style={{ y }} className={`space-y-4 lg:space-y-6 ${isEven ? "" : "text-right lg:text-left"}`}>
+          <h2 className="text-3xl lg:text-4xl tracking-tight uppercase font-bold leading-[1.1]">{step.title}</h2>
+          <div className={`flex items-center gap-4 pt-2 lg:pt-4 ${isEven ? "" : "justify-end lg:justify-start"}`}>
+            <div className={`w-8 lg:w-12 h-0.5 bg-black ${isEven ? "order-1" : "order-2"}`}></div>
+            <p className={`text-[10px] lg:text-sm tracking-widest opacity-50 font-medium ${isEven ? "order-2" : "order-1"}`}>
               STEP {step.number}
             </p>
           </div>
-          <p className="text-lg opacity-70 leading-relaxed">
+          <p className="text-sm lg:text-lg opacity-70 leading-relaxed font-normal">
             {step.description}
           </p>
         </motion.div>
@@ -167,7 +169,7 @@ export function Process() {
         </div>
 
         {/* Process Steps */}
-        <div className="space-y-48">
+        <div className="space-y-32 lg:space-y-48">
           {steps.map((step, i) => (
             <ProcessStep key={step.number} step={step} index={i} />
           ))}

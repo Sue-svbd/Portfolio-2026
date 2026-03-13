@@ -1,15 +1,13 @@
 import chrome51 from "../../assets/chrome51.svg";
 import cube6 from "../../assets/Cube6_Transparent.svg";
 import group134 from "../../assets/Group_134.svg";
-import group13k from "../../assets/Group_13k.svg";
-import s56 from "../../assets/s56_1.svg";
-import chrome8 from "../../assets/chrome8.svg";
+
 
 // Studio 3D Images
 import studio1 from "../../assets/Studio/Desktop - 74.png";
-import studio2 from "../../assets/Studio/platf integr 4 1.png";
-import studio3 from "../../assets/Studio/platform - use case 1.png";
-import studio4 from "../../assets/Studio/Platform integration 2 1.png";
+import studio2 from "../../assets/Studio/Scan2026-03-03_102147 1.png";
+import studio3 from "../../assets/Studio//Scan2026-03-03_102317 1.png";
+import studio4 from "../../assets/Studio/Scan2026-03-03_102434 1.png";
 import studio5 from "../../assets/Studio/Screenshot 2026-01-20 at 17.25.45 1.png";
 
 // Platform Images
