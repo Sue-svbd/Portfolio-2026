@@ -59,7 +59,7 @@ function ProcessStep({ step, index }: { step: any; index: number }) {
       className="grid grid-cols-12 gap-12 items-center"
     >
       {/* Image Container */}
-      <div className={`col-span-6 ${index % 2 === 0 ? "order-1" : "order-2"}`}>
+      <div className={`col-span-12 lg:col-span-6 ${index % 2 === 0 ? "order-1" : "order-2"}`}>
         <div className="relative group overflow-hidden bg-black">
           <motion.div
             style={{ y: imageY, scale: activeScale }}
@@ -89,7 +89,7 @@ function ProcessStep({ step, index }: { step: any; index: number }) {
       </div>
 
       {/* Content */}
-      <div className={`col-span-6 ${index % 2 === 0 ? "order-2" : "order-1"}`}>
+      <div className={`col-span-12 lg:col-span-6 ${index % 2 === 0 ? "order-2" : "order-1"}`}>
         <motion.div style={{ y }} className="space-y-6">
           <h2 className="text-4xl tracking-tight uppercase">{step.title}</h2>
           <div className="flex items-center gap-4 pt-4">
@@ -146,7 +146,7 @@ export function Process() {
   ];
 
   return (
-    <div ref={containerRef} className="min-h-screen px-8 pt-10 pb-20">
+    <div ref={containerRef} className="min-h-screen px-8 pt-10 pb-20 overflow-x-hidden">
       <div className="max-w-[1800px] mx-auto">
         {/* Header */}
         <div className="mb-20">
@@ -154,7 +154,7 @@ export function Process() {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-[160px] tracking-tighter mb-8 uppercase leading-[0.8]"
+            className="text-[74px] lg:text-[160px] tracking-tighter mb-8 uppercase leading-[0.8]"
           >
             CREATIVE <br /> PROCESS
           </motion.h1>
@@ -181,7 +181,7 @@ export function Process() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-3xl tracking-tight mb-6 uppercase">
+              <h3 className="text-xl lg:text-3xl tracking-tight mb-6 uppercase">
                 [ PHILOSOPHY ]
               </h3>
               <p className="text-lg opacity-70 leading-relaxed">
@@ -196,7 +196,7 @@ export function Process() {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              <h3 className="text-3xl tracking-tight mb-6 uppercase">
+              <h3 className="text-xl lg:text-3xl tracking-tight mb-6 uppercase">
                 [ PRINCIPLES ]
               </h3>
               <div className="space-y-3">
