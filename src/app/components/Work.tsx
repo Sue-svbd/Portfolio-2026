@@ -6,33 +6,46 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 const LAYOUT_CLASSES = [
   {
-    wrapper: "lg:col-span-3 lg:row-span-2",
-    image: "lg:h-[420px]",
-    align: "lg:self-start",
-  },
-  {
-    wrapper: "lg:col-span-4 lg:row-span-3",
-    image: "lg:h-[520px]",
-    align: "lg:self-center",
-  },
-  {
-    wrapper: "lg:col-span-3 lg:row-span-2",
-    image: "lg:h-[380px]",
-    align: "lg:self-end",
-  },
-  {
-    wrapper: "lg:col-span-2 lg:row-span-2",
-    image: "lg:h-[340px]",
-    align: "lg:self-start",
-  },
-  {
-    wrapper: "lg:col-span-3 lg:row-span-3",
+    wrapper: "lg:col-span-8 lg:col-start-2",
     image: "lg:h-[500px]",
+    align: "lg:self-start",
+    marginTop: "lg:mt-0",
+  },
+  {
+    wrapper: "lg:col-span-10 lg:col-start-14",
+    image: "lg:h-[600px]",
     align: "lg:self-center",
+    marginTop: "lg:mt-40",
+  },
+  {
+    wrapper: "lg:col-span-7 lg:col-start-4",
+    image: "lg:h-[450px]",
+    align: "lg:self-end",
+    marginTop: "lg:mt-20",
+  },
+  {
+    wrapper: "lg:col-span-9 lg:col-start-12",
+    image: "lg:h-[550px]",
+    align: "lg:self-start",
+    marginTop: "lg:mt-0",
+  },
+  {
+    wrapper: "lg:col-span-11 lg:col-start-2",
+    image: "lg:h-[650px]",
+    align: "lg:self-center",
+    marginTop: "lg:mt-32",
   },
 ];
 
-function ProjectCard({ project, index, layout }: { project: Project; index: number; layout: any }) {
+function ProjectCard({
+  project,
+  index,
+  layout,
+}: {
+  project: Project;
+  index: number;
+  layout: any;
+}) {
   const cardRef = useRef(null);
   const navigate = useNavigate();
   const { scrollYProgress } = useScroll({
@@ -41,14 +54,12 @@ function ProjectCard({ project, index, layout }: { project: Project; index: numb
   });
 
   const handleProjectClick = () => {
-    // We scroll to top immediately to ensure the expansion 
-    // measurement is correct for the destination page
-    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
     navigate(`/work/${project.id}`, { state: { skipCurtain: true } });
   };
 
-  const y = useTransform(scrollYProgress, [0, 1], [30, -30]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   return (
@@ -56,22 +67,24 @@ function ProjectCard({ project, index, layout }: { project: Project; index: numb
       ref={cardRef}
       style={{ opacity }}
       onClick={handleProjectClick}
-      className={`group cursor-pointer ${layout.wrapper} ${layout.align}`}
+      className={`group cursor-pointer ${layout.wrapper} ${layout.align} ${layout.marginTop}`}
     >
       {/* Project Number */}
-      <motion.p 
+      <motion.p
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 0.3, x: 0 }}
-        className="text-sm tracking-widest mb-4"
+        className="text-sm tracking-widest mb-6 font-medium"
       >
         [{String(index + 1).padStart(2, "0")}]
       </motion.p>
 
       {/* Image Container */}
-      <div className={`bg-black/5 overflow-hidden mb-6 relative aspect-[4/3] lg:aspect-auto ${layout.image}`}>
-        <motion.div 
+      <div
+        className={`bg-black/5 overflow-hidden mb-10 relative ${layout.image}`}
+      >
+        <motion.div
           layoutId={`project-image-${project.id}`}
-          style={{ scale: imageScale }} 
+          style={{ scale: imageScale }}
           className="w-full h-full"
         >
           <ImageWithFallback
@@ -86,21 +99,25 @@ function ProjectCard({ project, index, layout }: { project: Project; index: numb
           whileHover={{ opacity: 1 }}
           className="absolute inset-0 bg-[#614DD5]/90 flex items-center justify-center opacity-0 transition-opacity z-20"
         >
-          <p className="text-white text-xl tracking-widest font-bold">VIEW PROJECT</p>
+          <p className="text-white text-xl tracking-widest font-bold">
+            VIEW PROJECT
+          </p>
         </motion.div>
       </div>
 
       {/* Info */}
-      <motion.div style={{ y }} className="space-y-2">
-        <div className="flex justify-between items-start">
-          <h3 className="text-2xl tracking-tight uppercase font-bold">
+      <motion.div style={{ y }} className="space-y-3">
+        <div className="flex justify-between items-end border-b border-black/10 pb-4">
+          <h3 className="text-4xl tracking-tighter uppercase font-bold leading-none">
             {project.title}
           </h3>
-          <p className="text-sm tracking-widest opacity-50">{project.year}</p>
+          <p className="text-sm tracking-widest opacity-40 font-medium">
+            {project.year}
+          </p>
         </div>
-        <div className="flex gap-4 text-sm tracking-wide opacity-70">
+        <div className="flex gap-4 text-xs tracking-[2px] opacity-60 uppercase font-bold pt-2">
           <p>{project.category}</p>
-          <span>•</span>
+          <span>/</span>
           <p>{project.client}</p>
         </div>
       </motion.div>
@@ -109,14 +126,14 @@ function ProjectCard({ project, index, layout }: { project: Project; index: numb
 }
 
 export function Work() {
-  const filteredProjects = PROJECTS; // Can re-add filtering logic if needed
+  const filteredProjects = PROJECTS;
 
   return (
-    <div className="min-h-screen px-8 pt-10 pb-20">
+    <div className="min-h-screen px-8 pt-10 pb-20 overflow-x-hidden">
       <div className="max-w-[1800px] mx-auto">
         {/* Header */}
-        <div className="mb-20">
-          <motion.h1 
+        <div className="mb-40">
+          <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
@@ -124,7 +141,7 @@ export function Work() {
           >
             SELECTED <br /> WORK
           </motion.h1>
-          <motion.div 
+          <motion.div
             initial={{ width: 0 }}
             animate={{ width: 128 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -133,7 +150,7 @@ export function Work() {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-20 lg:auto-rows-[260px]">
+        <div className="grid grid-cols-1 lg:grid-cols-24 items-start">
           {filteredProjects.map((project, i) => (
             <ProjectCard
               key={project.id}
@@ -146,10 +163,10 @@ export function Work() {
 
         {/* CTA */}
         <div className="text-center py-32">
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 0.7 }}
-            className="text-xl tracking-wide mb-8"
+            className="text-s tracking-wide mb-8"
           >
             INTERESTED IN WORKING TOGETHER?
           </motion.p>

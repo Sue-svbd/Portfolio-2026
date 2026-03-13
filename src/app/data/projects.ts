@@ -12,6 +12,14 @@ import studio3 from "../../assets/Studio/platform - use case 1.png";
 import studio4 from "../../assets/Studio/Platform integration 2 1.png";
 import studio5 from "../../assets/Studio/Screenshot 2026-01-20 at 17.25.45 1.png";
 
+// Platform Images
+import platform1 from "../../assets/platform/platf integr 4 1.png";
+import platform2 from "../../assets/platform/platform - use case 1.png";
+import platform3 from "../../assets/platform/platform editor 1.png";
+import platform4 from "../../assets/platform/Platform integration 2 1.png";
+import platform5 from "../../assets/platform/Platform integration 3.png";
+import platform6 from "../../assets/platform/platftorm integration 3 1.png";
+
 // Approach images placeholders for other projects
 import process1 from "../../assets/1.svg";
 import process2 from "../../assets/2.svg";
@@ -36,7 +44,7 @@ export const PROJECTS: Project[] = [
     id: "studio-3d-redesign",
     title: "STUDIO 3D REDESIGN",
     client: "3D PROVIDER",
-    year: "2026",
+    year: "2024",
     image: chrome51,
     category: "3D DESIGN",
     description:
@@ -59,8 +67,15 @@ export const PROJECTS: Project[] = [
     approachIntroduction:
       "Creating A Unified Platform for a Fragmented Digital Ecosystem",
     approachText:
-      "I simplified complex data tables into interactive dashboards. By prioritizing the most critical KPIs, users can now make faster decisions without being overwhelmed by technical noise.",
-    approachImages: [process2, process3, process1],
+      "I get all the teams on the same page first, figuring out exactly what everyone needed. Starting from scratch, I ditched scattered setups and built a flexible, modular system of reusable components. This let me design one seamless platform—including a dedicated management dashboard for the business customers—without building a clunky monolith. Finally, I tied it all together by baking a fresh new branding right into the UI.",
+    approachImages: [
+      platform1,
+      platform2,
+      platform3,
+      platform4,
+      platform5,
+      platform6,
+    ],
   },
   {
     id: "mobile-app-redesign",
@@ -76,33 +91,5 @@ export const PROJECTS: Project[] = [
     approachText:
       "The core challenge was trust. I used a warm color palette and friendly micro-interactions to make financial management feel less intimidating and more human.",
     approachImages: [process3, process1, process2, process4],
-  },
-  {
-    id: "creative-portfolio",
-    title: "CREATIVE PORTFOLIO",
-    client: "PHOTOGRAPHER",
-    year: "2026",
-    image: chrome8,
-    category: "WEB DESIGN",
-    description:
-      "A minimal, high-impact portfolio for a world-class photographer, letting the work speak for itself.",
-    approachIntroduction: "EMPHASIZING THE ART BY ELIMINATING THE INTERFACE.",
-    approachText:
-      "I removed all unnecessary UI elements. The navigation is almost invisible, appearing only when needed, to ensure the full-screen imagery remains the hero of the experience.",
-    approachImages: [process1, process2, process3],
-  },
-  {
-    id: "food-delivery-app",
-    title: "FOOD DELIVERY APP",
-    client: "FOOD STARTUP",
-    year: "2025",
-    image: s56,
-    category: "MOBILE",
-    description:
-      "Streamlining the food ordering process with a focus on local communities and sustainable delivery.",
-    approachIntroduction: "REDEFINING THE PATH FROM HUNGER TO SATISFACTION.",
-    approachText:
-      "I optimized the user flow to reduce the number of clicks from 'hunger' to 'ordered' by 40%. The result is a highly efficient, delightful ordering experience.",
-    approachImages: [process2, process3, process1, process4, process2],
   },
 ];

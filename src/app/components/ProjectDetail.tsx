@@ -124,14 +124,12 @@ export function ProjectDetail() {
               >
                 <CarouselContent className="-ml-8">
                   {project.approachImages.map((img, i) => (
-                    <CarouselItem key={i} className="pl-8 md:basis-1/2 lg:basis-2/3">
-                      <div className="relative aspect-[16/9] overflow-hidden rounded-[13px] shadow-[0px_4px_12px_0px_rgba(0,0,0,0.25)] bg-gray-100">
-                        <FigmaImage 
-                          src={img} 
-                          alt={`Approach step ${i + 1}`} 
-                          className="w-full h-full object-cover" 
-                        />
-                      </div>
+                    <CarouselItem key={i} className="pl-8 basis-auto">
+                      <FigmaImage 
+                        src={img} 
+                        alt={`Approach step ${i + 1}`} 
+                        className="h-[600px] w-auto object-contain block" 
+                      />
                     </CarouselItem>
                   ))}
                 </CarouselContent>
