@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { Outlet, Link, useLocation, useOutlet } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
+
+// Preload critical assets
+import chrome51 from "../../assets/chrome51.svg";
+import cube6 from "../../assets/Cube6_Transparent.svg";
+import group134 from "../../assets/Group_134.svg";
+import group13k from "../../assets/Group_13k.svg";
+import s56 from "../../assets/s56_1.svg";
+import heroImg from "../../assets/hero.jpg";
+
+const PRELOAD_IMAGES = [chrome51, cube6, group134, group13k, s56, heroImg];
 
 const ROLES = [
   "/VISUAL DESIGNER ",
@@ -12,11 +22,11 @@ const ROLES = [
 ];
 
 function TypingRoles() {
-  const [displayLines, setDisplayLines] = React.useState<string[]>([""]);
-  const [lineIndex, setLineIndex] = React.useState(0);
-  const [charIndex, setCharIndex] = React.useState(0);
+  const [displayLines, setDisplayLines] = useState<string[]>([""]);
+  const [lineIndex, setLineIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const line = ROLES[lineIndex];
     if (!line) return;
 
@@ -59,6 +69,20 @@ export function RootLayout() {
   const location = useLocation();
   const outlet = useOutlet();
   const isHome = location.pathname === "/";
+  const skipCurtain = location.state?.skipCurtain;
+
+  // Preload images once on mount
+  useEffect(() => {
+    PRELOAD_IMAGES.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
+  // Use layout effect for instant scroll reset
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   const navItems = [
     { name: "ABOUT", path: "/about" },
@@ -67,7 +91,7 @@ export function RootLayout() {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-black flex flex-col overflow-hidden">
+    <div className="min-h-screen bg-white text-black flex flex-col overflow-x-hidden">
       {/* Navigation */}
       <nav
         className={`fixed top-0 left-0 right-0 z-50 px-8 py-6 transition-colors duration-300 ${
@@ -105,52 +129,48 @@ export function RootLayout() {
               </div>
             )}
 
-            <button
+            <a
+              href="mailto:susannacapacchione@gmail.com"
               className="flex items-center gap-2 text-[14px] font-medium tracking-[0.55px] border border-black px-6 py-2.5 hover:bg-black hover:text-white transition-all duration-300 group"
             >
               CONTACT <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </button>
+            </a>
           </div>
         </div>
       </nav>
 
-      {/* Main Content with Sequenced Fade and Screen Wipe */}
+      {/* Main Content with Integrated Curtain */}
       <main className={`flex-1 relative ${!isHome ? 'pt-[100px]' : ''}`}>
-        <AnimatePresence mode="wait" initial={false}>
+        <AnimatePresence mode="wait">
           <motion.div 
             key={location.pathname}
-            className="w-full"
+            className="w-full relative"
           >
-            {/* 
-              Content Layer: 
-              Fades out over 0.6s.
-            */}
+            {/* Page Content */}
             <motion.div
-              initial={{ opacity: 0 }}
+              initial={skipCurtain ? { opacity: 1 } : { opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+              exit={skipCurtain ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ 
+                duration: skipCurtain ? 0 : 0.3, 
+                delay: skipCurtain ? 0 : 0.3 
+              }}
               className="w-full min-h-screen"
             >
               {outlet}
             </motion.div>
 
-            {/* 
-              Wipe Curtain Layer: 
-              Added a 0.4s delay on exit so the content is mostly gone before the curtain starts.
-              Increased curtain speed slightly to keep the total transition time snappy.
-            */}
-            <motion.div
-              initial={{ scaleY: 1 }}
-              animate={{ scaleY: 0 }}
-              exit={{ scaleY: 1 }}
-              style={{ originY: 0 }}
-              transition={{ 
-                animate: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-                exit: { duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.4 }
-              }}
-              className="fixed inset-0 bg-[#6951ff] z-[9999] pointer-events-none"
-            />
+            {/* The Curtain Layer - Only render if NOT skipping */}
+            {!skipCurtain && (
+              <motion.div
+                initial={{ scaleY: 1 }}
+                animate={{ scaleY: 0 }}
+                exit={{ scaleY: 1 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                style={{ originY: 0 }}
+                className="fixed inset-0 bg-[#6951ff] z-[9999] pointer-events-none"
+              />
+            )}
           </motion.div>
         </AnimatePresence>
       </main>

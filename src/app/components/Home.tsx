@@ -1,17 +1,44 @@
-import React from "react";
-import { motion } from "motion/react";
+import React, { useState, useEffect } from "react";
+import { motion, useMotionValue, useSpring } from "motion/react";
 import { Link } from "react-router";
 
 export function Home() {
   const [circleRotation, setCircleRotation] = React.useState(0);
+  
+  // Mouse parallax effect
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Smooth springs for the parallax
+  const springX = useSpring(mouseX, { stiffness: 100, damping: 30 });
+  const springY = useSpring(mouseY, { stiffness: 100, damping: 30 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      // Calculate offset from center (-1 to 1)
+      const x = (clientX - innerWidth / 2) / (innerWidth / 2);
+      const y = (clientY - innerHeight / 2) / (innerHeight / 2);
+      mouseX.set(x * 30); // Max 30px movement
+      mouseY.set(y * 30);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
 
   return (
-    <div className="min-h-[calc(100vh-200px)] overflow-hidden flex items-center">
+    <div className="min-h-[calc(100vh-200px)] overflow-hidden flex items-center relative">
       {/* Hero Section */}
       <section className="w-full max-w-[1800px] mx-auto px-8 relative flex items-center justify-center">
         <div className="relative w-full h-full flex items-center justify-center">
-          {/* Purple Concentric Circles - Center - using SVG directly */}
-          <div className="w-[911px] h-[911px] relative z-10 pointer-events-none">
+          
+          {/* Purple Concentric Circles */}
+          <motion.div 
+            style={{ x: springX, y: springY }}
+            className="w-[911px] h-[911px] relative z-10 pointer-events-none"
+          >
             <motion.div
               animate={{ rotate: circleRotation }}
               transition={{ type: "spring", stiffness: 140, damping: 18 }}
@@ -25,7 +52,7 @@ export function Home() {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M402.661 329.349C435.447 318.094 471.317 319.97 502.749 334.584C533.69 348.97 557.966 374.597 570.664 406.225L571.26 407.735C572.576 411.683 574.026 415.496 575.195 419.43C576.361 423.354 577.146 427.411 578.006 431.441C578.856 435.422 579.235 439.489 579.71 443.582L580.138 455.881L579.599 468.162C579.125 472.236 578.453 476.267 577.887 480.367C577.609 482.379 577.142 484.359 576.624 486.348C576.109 488.327 575.539 490.333 575.074 492.35C574.157 496.331 572.498 500.056 571.169 504.016C563.392 524.373 550.752 542.519 534.351 556.869C517.949 571.219 498.286 581.338 477.075 586.342C455.865 591.346 433.752 591.082 412.667 585.576C391.911 580.156 372.771 569.817 356.863 555.439L356.108 554.752C342.511 542.214 331.663 526.989 324.255 510.041C316.839 492.951 313.014 474.519 313.016 455.889L313.804 441.981C314.389 437.485 315.198 432.793 315.92 428.211C316.637 423.66 318.283 419.305 319.497 414.723C320.682 410.251 322.723 406.113 324.413 401.731C331.844 384.805 342.695 369.597 356.286 357.065L356.287 357.066C369.74 344.824 385.507 335.398 402.66 329.348L402.661 329.349ZM502.145 342.718C479.739 333.473 455.092 331.091 431.331 335.875C407.57 340.659 385.765 352.393 368.683 369.589C351.664 386.699 340.087 408.461 335.406 432.136C330.726 455.81 333.151 480.34 342.378 502.64C351.605 524.939 367.221 544.012 387.261 557.458C407.301 570.904 430.87 578.123 455.003 578.207H455.004C487.511 578.261 518.71 565.404 541.741 542.462C564.767 519.525 577.745 488.385 577.822 455.886V455.863C577.832 431.633 570.647 407.946 557.178 387.804C543.704 367.656 524.55 351.963 502.145 342.718Z"
+                  d="M402.661 329.349C435.447 318.094 471.317 319.97 502.749 334.584C533.69 348.97 557.966 374.597 570.664 406.225L571.26 407.735C572.576 411.683 574.026 415.496 575.195 419.43C575.361 423.354 577.146 427.411 578.006 431.441C578.856 435.422 579.235 439.489 579.71 443.582L580.138 455.881L579.599 468.162C579.125 472.236 578.453 476.267 577.887 480.367C577.609 482.379 577.142 484.359 576.624 486.348C576.109 488.327 575.539 490.333 575.074 492.35C574.157 496.331 572.498 500.056 571.169 504.016C563.392 524.373 550.752 542.519 534.351 556.869C517.949 571.219 498.286 581.338 477.075 586.342C455.865 591.346 433.752 591.082 412.667 585.576C391.911 580.156 372.771 569.817 356.863 555.439L356.108 554.752C342.511 542.214 331.663 526.989 324.255 510.041C316.839 492.951 313.014 474.519 313.016 455.889L313.804 441.981C314.389 437.485 315.198 432.793 315.92 428.211C316.637 423.66 318.283 419.305 319.497 414.723C320.682 410.251 322.723 406.113 324.413 401.731C331.844 384.805 342.695 369.597 356.286 357.065L356.287 357.066C369.74 344.824 385.507 335.398 402.66 329.348L402.661 329.349ZM502.145 342.718C479.739 333.473 455.092 331.091 431.331 335.875C407.57 340.659 385.765 352.393 368.683 369.589C351.664 386.699 340.087 408.461 335.406 432.136C330.726 455.81 333.151 480.34 342.378 502.64C351.605 524.939 367.221 544.012 387.261 557.458C407.301 570.904 430.87 578.123 455.003 578.207H455.004C487.511 578.261 518.71 565.404 541.741 542.462C564.767 519.525 577.745 488.385 577.822 455.886V455.863C577.832 431.633 570.647 407.946 557.178 387.804C543.704 367.656 524.55 351.963 502.145 342.718Z"
                   fill="#614DD5"
                   stroke="#614DD5"
                 />
@@ -106,16 +133,17 @@ export function Home() {
                 />
               </svg>
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* WORK - Left Side */}
-          <div
+          <motion.div
+            style={{ x: springX, y: springY }}
             className="absolute z-20"
             style={{ top: "30%", left: "12%" }}
           >
             <Link to="/work">
               <motion.p
-                whileHover={{ scale: 1.05, x: 10 }}
+                whileHover={{ scale: 1.1, x: 20 }}
                 onHoverStart={() => setCircleRotation(-20)}
                 onHoverEnd={() => setCircleRotation(0)}
                 className="font-['Zalando_Sans_Expanded',sans-serif] font-bold leading-[134.215px] text-[124px] text-black tracking-[-7.895px] cursor-pointer"
@@ -123,16 +151,17 @@ export function Home() {
                 WORK
               </motion.p>
             </Link>
-          </div>
+          </motion.div>
 
           {/* ABOUT - Right Top */}
-          <div
+          <motion.div
+            style={{ x: springX, y: springY }}
             className="absolute z-0"
             style={{ top: "18%", right: "10%" }}
           >
             <Link to="/about">
               <motion.p
-                whileHover={{ scale: 1.05, x: -10 }}
+                whileHover={{ scale: 1.1, x: -20 }}
                 onHoverStart={() => setCircleRotation(20)}
                 onHoverEnd={() => setCircleRotation(0)}
                 className="font-['Zalando_Sans_Expanded',sans-serif] font-bold leading-[134.215px] text-[130px] text-black tracking-[-7.895px] cursor-pointer"
@@ -140,16 +169,17 @@ export function Home() {
                 ABOUT
               </motion.p>
             </Link>
-          </div>
+          </motion.div>
 
           {/* PROCESS - Right Bottom */}
-          <div
+          <motion.div
+            style={{ x: springX, y: springY }}
             className="absolute z-20"
             style={{ top: "63%", right: "16%" }}
           >
             <Link to="/process">
               <motion.p
-                whileHover={{ scale: 1.05, x: -10 }}
+                whileHover={{ scale: 1.1, x: -20 }}
                 onHoverStart={() => setCircleRotation(-20)}
                 onHoverEnd={() => setCircleRotation(0)}
                 className="font-['Zalando_Sans_Expanded',sans-serif] font-bold leading-[134.215px] text-[64px] text-black tracking-[-7.895px] cursor-pointer uppercase"
@@ -157,7 +187,7 @@ export function Home() {
                 PROCESS
               </motion.p>
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

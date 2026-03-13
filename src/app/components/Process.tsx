@@ -1,4 +1,5 @@
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform, Variants } from "motion/react";
+import { useRef } from "react";
 import { Search, Pencil, Layers, Sparkles } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import process1 from "../../assets/1.svg";
@@ -6,13 +7,103 @@ import process2 from "../../assets/2.svg";
 import process3 from "../../assets/3.svg";
 import process4 from "../../assets/4.svg";
 
+// Frequency disturbance animation variants
+const distortionVariants: Variants = {
+  animate: {
+    scale: [1, 1.04, 0.98, 1.02, 1],
+    skewX: [0, 2, -2, 1, 0],
+    filter: [
+      "contrast(1) brightness(1) blur(0px)",
+      "contrast(1.1) brightness(1.1) blur(0.5px)",
+      "contrast(0.9) brightness(0.9) blur(0px)",
+      "contrast(1) brightness(1) blur(0px)",
+    ],
+    transition: {
+      duration: 4,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+};
+
+function ProcessStep({ step, index }: { step: any; index: number }) {
+  const stepRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: stepRef,
+    offset: ["start end", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [-20, 20]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+
+  return (
+    <motion.div
+      ref={stepRef}
+      style={{ opacity }}
+      className="grid grid-cols-12 gap-12 items-center"
+    >
+      {/* Image Container */}
+      <div className={`col-span-6 ${index % 2 === 0 ? "order-1" : "order-2"}`}>
+        <div className="relative group overflow-hidden bg-black">
+          <motion.div
+            style={{ y: imageY }}
+            className="aspect-square relative z-10 scale-110"
+          >
+            <motion.div
+              initial={{ backgroundColor: "#000000" }}
+              whileHover={{ backgroundColor: "#614DD5" }}
+              transition={{ duration: 1, ease: "easeInOut" }}
+              className="w-full h-full relative overflow-hidden"
+            >
+              <motion.div
+                animate="animate"
+                className="w-full h-full transform-gpu"
+                variants={distortionVariants}
+              >
+                <motion.div
+                  className="w-full h-full"
+                >
+                  <ImageWithFallback
+                    src={step.image}
+                    alt={step.title}
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className={`col-span-6 ${index % 2 === 0 ? "order-2" : "order-1"}`}>
+        <motion.div style={{ y }} className="space-y-6">
+          <h2 className="text-4xl tracking-tight uppercase">{step.title}</h2>
+          <div className="flex items-center gap-4 pt-4">
+            <div className="w-12 h-0.5 bg-black"></div>
+            <p className="text-sm tracking-widest opacity-50">
+              STEP {step.number}
+            </p>
+          </div>
+          <p className="text-lg opacity-70 leading-relaxed">
+            {step.description}
+          </p>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+}
+
 export function Process() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const steps = [
     {
       number: "01",
       title: "DISCOVERY & DIAGNOSIS",
       description:
-        "I start by digging deep to figure out the rEeal problem. I do user research and use tools like Hotjar to see exactly how people are behaving, which gives me concrete data on their frustrations and where we can improve.",
+        "I start by digging deep to figure out the real problem. I do user research and use tools like Hotjar to see exactly how people are behaving, which gives me concrete data on their frustrations and where we can improve.",
       icon: Search,
       image: process1,
     },
@@ -42,103 +133,42 @@ export function Process() {
     },
   ];
 
-  // Frequency disturbance animation variants
-  const distortionVariants = {
-    animate: {
-      scale: [1, 1.02, 0.99, 1.01, 1],
-      skewX: [0, 1, -1, 0.5, 0],
-      filter: [
-        "contrast(1) brightness(1)",
-        "contrast(1.1) brightness(1.05)",
-        "contrast(0.95) brightness(0.98)",
-        "contrast(1) brightness(1)",
-      ],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    },
-  };
-
   return (
-    <div className="min-h-screen px-8 pt-10 pb-20">
+    <div ref={containerRef} className="min-h-screen px-8 pt-10 pb-20">
       <div className="max-w-[1800px] mx-auto">
         {/* Header */}
         <div className="mb-20">
-          <h1 className="text-8xl tracking-tighter mb-8 uppercase">
-            CREATIVE PROCESS
-          </h1>
-          <div className="w-32 h-1 bg-black mb-8"></div>
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-[160px] tracking-tighter mb-8 uppercase leading-[0.8]"
+          >
+            CREATIVE <br /> PROCESS
+          </motion.h1>
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: 128 }}
+            viewport={{ once: true }}
+            className="h-1 bg-[#614DD5] mb-8"
+          ></motion.div>
         </div>
 
         {/* Process Steps */}
-        <div className="space-y-32">
+        <div className="space-y-48">
           {steps.map((step, i) => (
-            <div
-              key={i}
-              className={`grid grid-cols-12 gap-12 items-center ${
-                i % 2 === 0 ? "" : "direction-reverse"
-              }`}
-            >
-              {/* Image Container with Hover Background Transition */}
-              <div
-                className={`col-span-6 ${i % 2 === 0 ? "order-1" : "order-2"}`}
-              >
-                <div className="relative group">
-                  <motion.div 
-                    initial={{ backgroundColor: "#000000" }}
-                    whileHover={{ backgroundColor: "#614DD5" }}
-                    transition={{ duration: 2, ease: "easeInOut" }}
-                    className="aspect-square overflow-hidden relative z-10"
-                  >
-                    {/* Distorted Image */}
-                    <motion.div
-                      variants={distortionVariants}
-                      animate="animate"
-                      className="w-full h-full"
-                    >
-                      <ImageWithFallback
-                        src={step.image}
-                        alt={step.title}
-                        className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
-                      />
-                    </motion.div>
-                  </motion.div>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div
-                className={`col-span-6 ${i % 2 === 0 ? "order-2" : "order-1"}`}
-              >
-                <div className="space-y-6">
-                  {/* Title */}
-                  <h2 className="text-4xl tracking-tight uppercase">
-                    {step.title}
-                  </h2>
-                  {/* Step Number */}
-                  <div className="flex items-center gap-4 pt-4">
-                    <div className="w-12 h-0.5 bg-black"></div>
-                    <p className="text-sm tracking-widest opacity-50">
-                      STEP {step.number}
-                    </p>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-lg opacity-70 leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
-              </div>
-            </div>
+            <ProcessStep key={step.number} step={step} index={i} />
           ))}
         </div>
 
         {/* Philosophy Section */}
         <div className="mt-40 py-20 border-t border-black/10">
           <div className="grid grid-cols-2 gap-16">
-            <div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
               <h3 className="text-3xl tracking-tight mb-6 uppercase">
                 [ PHILOSOPHY ]
               </h3>
@@ -147,8 +177,13 @@ export function Process() {
                 right. My goal is to create experiences that are intuitive,
                 memorable, and truly serve the people who use them.
               </p>
-            </div>
-            <div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
               <h3 className="text-3xl tracking-tight mb-6 uppercase">
                 [ PRINCIPLES ]
               </h3>
@@ -158,16 +193,16 @@ export function Process() {
                   "FORM FOLLOWS FUNCTION",
                   "DETAILS MAKE THE DIFFERENCE",
                   "DESIGN FOR EVERYONE",
-                ].map((principle, i) => (
+                ].map((principle) => (
                   <p
-                    key={i}
-                    className="text-lg tracking-wide border-l-2 border-black pl-4 opacity-70"
+                    key={principle}
+                    className="text-lg tracking-wide border-l-2 border-[#614DD5] pl-4 opacity-70"
                   >
                     {principle}
                   </p>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
