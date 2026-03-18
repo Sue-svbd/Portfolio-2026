@@ -7,17 +7,23 @@ import { ProjectDetail } from "./components/ProjectDetail";
 import { Process } from "./components/Process";
 import { NotFound } from "./components/NotFound";
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      Component: RootLayout,
+      children: [
+        { index: true, Component: Home },
+        { path: "about", Component: About },
+        { path: "work", Component: Work },
+        { path: "work/:projectId", Component: ProjectDetail },
+        { path: "process", Component: Process },
+        { path: "*", Component: NotFound },
+      ],
+    },
+  ],
   {
-    path: "/",
-    Component: RootLayout,
-    children: [
-      { index: true, Component: Home },
-      { path: "about", Component: About },
-      { path: "work", Component: Work },
-      { path: "work/:projectId", Component: ProjectDetail },
-      { path: "process", Component: Process },
-      { path: "*", Component: NotFound },
-    ],
+    // ADD THIS CONFIGURATION OBJECT HERE
+    basename: import.meta.env.BASE_URL,
   },
-]);
+);

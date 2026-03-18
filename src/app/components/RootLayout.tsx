@@ -22,46 +22,46 @@ const ROLES = [
 ];
 
 function TypingRoles() {
-  const [displayLines, setDisplayLines] = useState<string[]>([""]);
-  const [lineIndex, setLineIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(100);
 
   useEffect(() => {
-    const line = ROLES[lineIndex];
-    if (!line) return;
+    const currentRole = ROLES[roleIndex];
+    
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        // Typing
+        const nextText = currentRole.slice(0, displayText.length + 1);
+        setDisplayText(nextText);
+        setTypingSpeed(100);
 
-    const isEndOfLine = charIndex === line.length;
-    const delay = isEndOfLine ? 400 : 40;
+        if (nextText === currentRole) {
+          setIsDeleting(true);
+          setTypingSpeed(2000); // Pause at the end
+        }
+      } else {
+        // Deleting
+        const nextText = currentRole.slice(0, displayText.length - 1);
+        setDisplayText(nextText);
+        setTypingSpeed(50); // Faster deletion
 
-    const id = setTimeout(() => {
-      if (charIndex < line.length) {
-        setDisplayLines((prev) => {
-          const next = [...prev];
-          next[lineIndex] = (next[lineIndex] ?? "") + line[charIndex];
-          return next;
-        });
-        setCharIndex((prev) => prev + 1);
-      } else if (lineIndex < ROLES.length - 1) {
-        setDisplayLines((prev) => [...prev, ""]);
-        setLineIndex((prev) => prev + 1);
-        setCharIndex(0);
+        if (nextText === "") {
+          setIsDeleting(false);
+          setRoleIndex((prev) => (prev + 1) % ROLES.length);
+          setTypingSpeed(500); // Pause before next role
+        }
       }
-    }, delay);
+    }, typingSpeed);
 
-    return () => clearTimeout(id);
-  }, [charIndex, lineIndex]);
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, roleIndex, typingSpeed]);
 
   return (
-    <>
-      {displayLines.map((text, i) => (
-        <p
-          key={i}
-          className="font-['Inter:Regular',sans-serif] font-normal leading-[18px] text-[12px] text-black tracking-[0.0105px] whitespace-pre"
-        >
-          {text}
-        </p>
-      ))}
-    </>
+    <p className="font-['Sora',sans-serif] font-normal leading-[18px] md:text-[12px] text-[11px] text-black tracking-[0.0105px] whitespace-pre min-h-[18px]">
+      {displayText}<span className="animate-pulse font-bold text-[#614DD5]">|</span>
+    </p>
   );
 }
 
@@ -97,25 +97,34 @@ export function RootLayout() {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-black flex flex-col overflow-x-hidden relative">
+    <div className={`bg-white text-black flex flex-col overflow-x-hidden relative ${isHome ? "h-screen" : "min-h-screen"}`}>
       {/* Navigation */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-[100] px-8 py-6 transition-colors duration-300 ${
-          isHome ? "bg-transparent" : "bg-white/90 backdrop-blur-sm border-b border-black/5"
-        }`}
+        className={`${
+          isHome 
+            ? "h-[15vh] relative flex items-center" 
+            : "fixed top-0 left-0 right-0 py-6 z-[100] bg-white/90 backdrop-blur-sm border-b border-black/5"
+        } px-8 transition-colors duration-300 z-[100]`}
       >
-        <div className="max-w-[1800px] mx-auto flex justify-between items-start">
-          <div className="flex flex-col gap-1">
+        <div className="max-w-[1800px] w-full mx-auto flex justify-between items-start">
+          <div className="flex flex-col gap-1 md:items-start items-start">
             <Link
               to="/"
-              className="font-['Inter:Regular',sans-serif] text-[20px] tracking-tight hover:opacity-70 transition-opacity uppercase"
+              className="font-['Sora',sans-serif] md:text-[20px] text-[12px] tracking-tight hover:opacity-70 transition-opacity uppercase font-semibold"
             >
               SUSANNA CAPACCHIONE
             </Link>
-            {isHome && <TypingRoles />}
+            <div className="hidden md:block">
+              {isHome && <TypingRoles />}
+            </div>
           </div>
 
-          <div className="flex items-center gap-8 lg:gap-16">
+          <div className="flex items-center gap-4 md:gap-8 lg:gap-16 h-[28px]">
+            {isHome && (
+              <div className="md:hidden self-center">
+                <TypingRoles />
+              </div>
+            )}
             {!isHome && (
               <div className="hidden md:flex items-center gap-8 lg:gap-12">
                 {navItems.map((item) => {
@@ -143,13 +152,15 @@ export function RootLayout() {
               CONTACT <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
 
-            {/* Mobile Hamburger Button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="flex md:hidden items-center justify-center border border-black p-2.5 hover:bg-black hover:text-white transition-all duration-300 z-[101]"
-            >
-              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+            {/* Mobile Hamburger Button - Hidden on Home */}
+            {!isHome && (
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="flex md:hidden items-center justify-center border border-black p-2.5 hover:bg-black hover:text-white transition-all duration-300 z-[101]"
+              >
+                {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
+            )}
           </div>
         </div>
       </nav>
@@ -193,11 +204,11 @@ export function RootLayout() {
       </AnimatePresence>
 
       {/* Main Content with Integrated Curtain */}
-      <main className={`flex-1 relative ${!isHome ? 'pt-[100px]' : ''}`}>
+      <main className={`flex-1 relative ${isHome ? "h-[70vh] overflow-hidden" : "pt-[100px]"}`}>
         <AnimatePresence mode="wait">
           <motion.div 
             key={location.pathname}
-            className="w-full relative"
+            className="w-full h-full relative"
           >
             {/* Page Content */}
             <motion.div
@@ -208,7 +219,7 @@ export function RootLayout() {
                 duration: skipCurtain ? 0 : 0.3, 
                 delay: skipCurtain ? 0 : 0.3 
               }}
-              className="w-full min-h-screen"
+              className="w-full h-full"
             >
               {outlet}
             </motion.div>
@@ -229,8 +240,8 @@ export function RootLayout() {
       </main>
 
       {/* Footer */}
-      <footer className="px-8 py-12 border-t border-black/10">
-        <div className="max-w-[1800px] mx-auto flex justify-between items-center text-sm opacity-50">
+      <footer className={`${isHome ? "h-[15vh] flex items-center" : "py-12"} px-8 border-t border-black/10`}>
+        <div className="max-w-[1800px] w-full mx-auto flex justify-between items-center text-sm opacity-50">
           <p>© 2026 SUSANNA CAPACCHIONE. ALL RIGHTS RESERVED.</p>
           <p className="tracking-widest">AVAILABLE FOR COLLABORATION</p>
         </div>
