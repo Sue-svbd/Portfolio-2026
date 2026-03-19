@@ -29,7 +29,7 @@ function TypingRoles() {
 
   useEffect(() => {
     const currentRole = ROLES[roleIndex];
-    
+
     const timeout = setTimeout(() => {
       if (!isDeleting) {
         // Typing
@@ -60,7 +60,8 @@ function TypingRoles() {
 
   return (
     <p className="font-['Sora',sans-serif] font-normal leading-[18px] md:text-[12px] text-[11px] text-black tracking-[0.0105px] whitespace-pre min-h-[18px]">
-      {displayText}<span className="animate-pulse font-bold text-[#614DD5]">|</span>
+      {displayText}
+      <span className="animate-pulse font-bold text-[#614DD5]">|</span>
     </p>
   );
 }
@@ -97,26 +98,26 @@ export function RootLayout() {
   ];
 
   return (
-    <div className={`bg-white text-black flex flex-col overflow-x-hidden relative ${isHome ? "h-screen" : "min-h-screen"}`}>
+    <div
+      className={`bg-white text-black flex flex-col overflow-x-hidden relative ${isHome ? "h-screen" : "min-h-screen"}`}
+    >
       {/* Navigation */}
       <nav
         className={`${
-          isHome 
-            ? "h-[15vh] relative flex items-center" 
+          isHome
+            ? "h-[10vh] relative flex items-center"
             : "fixed top-0 left-0 right-0 py-6 z-[100] bg-white/90 backdrop-blur-sm border-b border-black/5"
         } px-8 transition-colors duration-300 z-[100]`}
       >
         <div className="max-w-[1800px] w-full mx-auto flex justify-between items-start">
-          <div className="flex flex-col gap-1 md:items-start items-start">
+          <div className="flex flex-col gap-1 md:items-start items-center">
             <Link
               to="/"
               className="font-['Sora',sans-serif] md:text-[20px] text-[12px] tracking-tight hover:opacity-70 transition-opacity uppercase font-semibold"
             >
               SUSANNA CAPACCHIONE
             </Link>
-            <div className="hidden md:block">
-              {isHome && <TypingRoles />}
-            </div>
+            <div className="hidden md:block">{isHome && <TypingRoles />}</div>
           </div>
 
           <div className="flex items-center gap-4 md:gap-8 lg:gap-16 h-[28px]">
@@ -149,7 +150,11 @@ export function RootLayout() {
               href="mailto:susannacapacchione@gmail.com"
               className="hidden md:flex items-center gap-2 text-[14px] font-medium tracking-[0.55px] border border-black px-6 py-2.5 hover:bg-black hover:text-white transition-all duration-300 group"
             >
-              CONTACT <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              CONTACT{" "}
+              <ArrowUpRight
+                size={16}
+                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+              />
             </a>
 
             {/* Mobile Hamburger Button - Hidden on Home */}
@@ -204,9 +209,11 @@ export function RootLayout() {
       </AnimatePresence>
 
       {/* Main Content with Integrated Curtain */}
-      <main className={`flex-1 relative ${isHome ? "h-[70vh] overflow-hidden" : "pt-[100px]"}`}>
+      <main
+        className={`flex-1 relative ${isHome ? "h-[70vh] overflow-hidden" : "pt-[100px]"}`}
+      >
         <AnimatePresence mode="wait">
-          <motion.div 
+          <motion.div
             key={location.pathname}
             className="w-full h-full relative"
           >
@@ -215,9 +222,9 @@ export function RootLayout() {
               initial={skipCurtain ? { opacity: 1 } : { opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={skipCurtain ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ 
-                duration: skipCurtain ? 0 : 0.3, 
-                delay: skipCurtain ? 0 : 0.3 
+              transition={{
+                duration: skipCurtain ? 0 : 0.3,
+                delay: skipCurtain ? 0 : 0.3,
               }}
               className="w-full h-full"
             >
@@ -240,8 +247,10 @@ export function RootLayout() {
       </main>
 
       {/* Footer */}
-      <footer className={`${isHome ? "h-[15vh] flex items-center" : "py-12"} px-8 border-t border-black/10`}>
-        <div className="max-w-[1800px] w-full mx-auto flex justify-between items-center text-sm opacity-50">
+      <footer
+        className={`${isHome ? "h-[10vh] flex items-center" : "py-12"} px-8 border-t border-black/10`}
+      >
+        <div className="max-w-[1800px] w-full mx-auto flex justify-between items-center text-xs opacity-50">
           <p>© 2026 SUSANNA CAPACCHIONE. ALL RIGHTS RESERVED.</p>
           <p className="tracking-widest">AVAILABLE FOR COLLABORATION</p>
         </div>
