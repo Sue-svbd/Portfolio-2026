@@ -1,3 +1,156 @@
-@import './fonts.css';
-@import './tailwind.css';
-@import './theme.css';
+@import "./fonts.css";
+@import "./tailwind.css";
+@import "./theme.css";
+
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch__main {
+  position: relative;
+  z-index: 3;
+}
+
+/* hidden by default */
+.glitch__layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* colors */
+.glitch__layer--1 {
+  color: #ff003c;
+}
+
+.glitch__layer--2 {
+  color: #00d9ff;
+}
+
+/* 🔥 TRIGGER ON HOVER */
+.glitch:hover .glitch__layer--1 {
+  animation: glitchBurst1 0.4s steps(2, end);
+  opacity: 1;
+}
+
+.glitch:hover .glitch__layer--2 {
+  animation: glitchBurst2 0.4s steps(2, end);
+  opacity: 1;
+}
+
+/* MAIN TEXT SHAKE */
+.glitch:hover .glitch__main {
+  animation: glitchMain 0.4s steps(2, end);
+}
+
+/* 🔥 ANIMATIONS (short + aggressive) */
+
+@keyframes glitchMain {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(2px, -2px);
+  }
+  60% {
+    transform: translate(-1px, 1px);
+  }
+  80% {
+    transform: translate(1px, -1px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes glitchBurst1 {
+  0% {
+    clip-path: inset(0 0 80% 0);
+    transform: translate(-4px, -2px);
+  }
+  25% {
+    clip-path: inset(20% 0 50% 0);
+    transform: translate(4px, 2px);
+  }
+  50% {
+    clip-path: inset(40% 0 30% 0);
+    transform: translate(-3px, 1px);
+  }
+  75% {
+    clip-path: inset(60% 0 10% 0);
+    transform: translate(3px, -2px);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    transform: translate(0);
+  }
+}
+
+@keyframes glitchBurst2 {
+  0% {
+    clip-path: inset(80% 0 0 0);
+    transform: translate(4px, 2px);
+  }
+  25% {
+    clip-path: inset(50% 0 20% 0);
+    transform: translate(-4px, -2px);
+  }
+  50% {
+    clip-path: inset(30% 0 40% 0);
+    transform: translate(2px, 3px);
+  }
+  75% {
+    clip-path: inset(10% 0 60% 0);
+    transform: translate(-2px, -3px);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    transform: translate(0);
+  }
+}
+.hero-graphic {
+  transition: transform 0.4s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.hero:has(.link-work:hover) .hero-graphic,
+.hero-container:has(.link-work:hover) .hero-graphic {
+  transform: translateX(-12px);
+  animation: bgJitter 0.3s steps(2);
+}
+
+.hero:has(.link-about:hover) .hero-graphic,
+.hero-container:has(.link-about:hover) .hero-graphic {
+  transform: translate(12px, -8px);
+  animation: bgJitter 0.3s steps(2);
+}
+
+.hero:has(.link-process:hover) .hero-graphic,
+.hero-container:has(.link-process:hover) .hero-graphic {
+  transform: translate(12px, 12px);
+  animation: bgJitter 0.8s steps(2);
+}
+
+@keyframes bgJitter {
+  0% {
+    margin: 0 0;
+  }
+  25% {
+    margin: -1.5px 1px;
+  }
+  50% {
+    margin: 1.5px -1px;
+  }
+  75% {
+    margin: -1px 1.5px;
+  }
+  100% {
+    margin: 0 0;
+  }
+}

@@ -10,6 +10,7 @@ import group134 from "../../assets/Group_134.svg";
 import group13k from "../../assets/Group_13k.svg";
 import s56 from "../../assets/s56_1.svg";
 import heroImg from "../../assets/hero.jpg";
+import { GlitchText } from "./ui/glitch";
 
 const PRELOAD_IMAGES = [chrome51, cube6, group134, group13k, s56, heroImg];
 
@@ -115,7 +116,7 @@ export function RootLayout() {
               to="/"
               className="font-['Sora',sans-serif] md:text-[20px] text-[12px] tracking-tight hover:opacity-70 transition-opacity uppercase font-semibold"
             >
-              SUSANNA CAPACCHIONE
+              <GlitchText>SUSANNA CAPACCHIONE</GlitchText>
             </Link>
             <div className="hidden md:block">{isHome && <TypingRoles />}</div>
           </div>

@@ -54,6 +54,7 @@ function ProjectCard({
   });
 
   const handleProjectClick = () => {
+    if (project.isComingSoon) return;
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
     navigate(`/work/${project.id}`, { state: { skipCurtain: true } });
   };
@@ -67,7 +68,7 @@ function ProjectCard({
       ref={cardRef}
       style={{ opacity }}
       onClick={handleProjectClick}
-      className={`group cursor-pointer ${layout.wrapper} ${layout.align} ${layout.marginTop}`}
+      className={`group ${project.isComingSoon ? "cursor-default" : "cursor-pointer"} ${layout.wrapper} ${layout.align} ${layout.marginTop}`}
     >
       {/* Project Number */}
       <motion.p
@@ -83,7 +84,7 @@ function ProjectCard({
         className={`bg-black/5 overflow-hidden mb-10 relative ${layout.image}`}
       >
         <motion.div
-          layoutId={`project-image-${project.id}`}
+          layoutId={project.isComingSoon ? undefined : `project-image-${project.id}`}
           style={{ scale: imageScale }}
           className="w-full h-full"
         >
@@ -100,7 +101,7 @@ function ProjectCard({
           className="absolute inset-0 bg-[#614DD5]/90 flex items-center justify-center opacity-0 transition-opacity z-20"
         >
           <p className="text-white text-xl tracking-widest font-bold">
-            VIEW PROJECT
+            {project.isComingSoon ? "COMING SOON" : "VIEW PROJECT"}
           </p>
         </motion.div>
       </div>

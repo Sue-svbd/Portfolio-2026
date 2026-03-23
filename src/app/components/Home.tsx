@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { ArrowUpRight } from "lucide-react";
 import group4 from "../../assets/Group-4.svg";
 import group4Mobile from "../../assets/Group-4-mobile.svg";
+import { GlitchText } from "./ui/glitch";
 
 export function Home() {
   return (
@@ -10,39 +11,42 @@ export function Home() {
       {/* Desktop Layout */}
       <section className="hidden md:flex w-full max-w-[1800px] mx-auto px-8 relative flex-1 items-center justify-center">
         {/* Main Layout Container - Based on Figma Frame Proportion */}
-        <div className="relative w-full max-w-[1200px] aspect-[1200/600] flex items-center">
+        
+        <div className="hero relative w-full max-w-[1200px] aspect-[1200/600] flex items-center">
           {/* WORK - Left Aligned */}
           <div className="absolute left-0 top-[20%] z-20">
-            <Link to="/work">
+            <Link to="/work" className="hero-link link-work">
               <p className="font-['Zalando_Sans_Expanded',sans-serif] font-bold leading-[134.215px] text-[96px] text-black tracking-[-7.895px] cursor-pointer">
-                WORK
+                <GlitchText> WORK </GlitchText>
               </p>
             </Link>
           </div>
 
           {/* Central Graphic - Scaled and Positioned */}
-          <div className="absolute left-[30%] right-[30%] h-full z-10 pointer-events-none flex items-center justify-center">
-            <img
-              src={group4}
-              alt="Background Graph"
-              className="h-full w-full object-contain opacity-90"
-            />
+          <div className=" absolute left-[30%] right-[30%] h-full z-10 pointer-events-none flex items-center justify-center">
+            <div className="graphic">
+              <img
+                src={group4}
+                alt="Background Graph"
+                className="h-full w-full object-contain opacity-90 hero-graphic"
+              />
+            </div>
           </div>
 
           {/* ABOUT - Top Right */}
           <div className="absolute right-0 top-0 z-20">
-            <Link to="/about">
+            <Link to="/about" className="hero-link link-about">
               <p className="font-['Zalando_Sans_Expanded',sans-serif] font-bold leading-[134.215px] text-[96px] text-black tracking-[-7.895px] cursor-pointer">
-                ABOUT
+                <GlitchText> ABOUT</GlitchText>
               </p>
             </Link>
           </div>
 
           {/* PROCESS - Bottom Right */}
           <div className="absolute right-0 bottom-0 z-20">
-            <Link to="/process">
+            <Link to="/process" className="hero-link link-process">
               <p className="font-['Zalando_Sans_Expanded',sans-serif] font-bold leading-[134.215px] text-[64px] text-black tracking-[-7.895px] cursor-pointer uppercase">
-                PROCESS
+                <GlitchText> PROCESS</GlitchText>
               </p>
             </Link>
           </div>
@@ -50,12 +54,12 @@ export function Home() {
       </section>
 
       {/* Mobile Layout */}
-      <section className="md:hidden w-full flex-1 flex flex-col relative px-4">
+      <section className="md:hidden w-full flex-1 flex flex-col relative px-4 hero-container">
         {/* ABOUT - Top Right */}
         <div className="absolute right-4 top-0 z-20">
-          <Link to="/about">
+          <Link to="/about" className="hero-link link-about">
             <p className="font-['Zalando_Sans_Expanded',sans-serif] font-semibold text-[48px] text-black tracking-[-3px] cursor-pointer">
-              ABOUT
+              <GlitchText> ABOUT </GlitchText>
             </p>
           </Link>
         </div>
@@ -67,7 +71,7 @@ export function Home() {
             <img
               src={group4Mobile}
               alt="Mobile Background Graph"
-              className="w-full object-contain"
+              className="w-full object-contain hero-graphic"
               style={{
                 position: "absolute",
                 top: " -226px",
@@ -77,7 +81,7 @@ export function Home() {
 
             {/* WORK - Overlaid on left side of graphic with exact specifications */}
             <div className="absolute left-0 top-1/2 -translate-y-1/2 z-20">
-              <Link to="/work">
+              <Link to="/work" className="hero-link link-work">
                 <p
                   className="font-['Zalando_Sans_Expanded',sans-serif] text-black cursor-pointer"
                   style={{
@@ -86,7 +90,7 @@ export function Home() {
                     lineHeight: "134.21px",
                   }}
                 >
-                  WORK
+                  <GlitchText> WORK</GlitchText>
                 </p>
               </Link>
             </div>
@@ -97,13 +101,13 @@ export function Home() {
             className="flex justify-center"
             style={{
               position: "absolute",
-              top: " 517px",
+              top: " 570px",
               left: "253px",
             }}
           >
-            <Link to="/process">
+            <Link to="/process" className="hero-link link-process">
               <p className="font-['Zalando_Sans_Expanded',sans-serif] font-semibold text-[32px] text-black tracking-[-2px] cursor-pointer uppercase">
-                PROCESS
+                <GlitchText>PROCESS</GlitchText>
               </p>
             </Link>
           </div>
