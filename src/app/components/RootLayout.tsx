@@ -213,6 +213,7 @@ export function RootLayout() {
       <main
         className={`flex-1 relative ${isHome ? "h-[70vh] overflow-hidden" : "pt-[100px]"}`}
       >
+
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}

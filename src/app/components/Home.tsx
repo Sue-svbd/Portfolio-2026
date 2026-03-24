@@ -84,7 +84,7 @@ export function Home() {
         <div className="flex-1 flex flex-col items-center justify-center w-full max-w-[500px] mx-auto relative">
           
           {/* ABOUT - Positioned above the image */}
-          <div className="mb-6 z-20">
+          <div className="mb-6 z-20 hero-about-text-container">
             <Link to="/about" className="hero-link link-about">
               <p className="font-['Zalando_Sans_Expanded',sans-serif] font-semibold text-black tracking-[-3px] cursor-pointer hero-about-text">
                 <GlitchText isActive={activeGlitch === "about"}> ABOUT </GlitchText>

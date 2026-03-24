@@ -164,6 +164,8 @@
 /* Mobile/Tablet specific styling for Home component */
 .hero-mobile-graphic {
   width: 100%;
+  position: absolute;
+  right: -19vw;
 }
 
 .hero-about-text {
@@ -174,6 +176,30 @@
   font-size: 91px;
   font-weight: 600;
   line-height: 1.1;
+}
+
+.hero-work-text-container {
+  position: absolute;
+  left: 20px !important;
+}
+
+.hero-about-text-container {
+  position: absolute !important;
+  top: 2% !important;
+  left: 55% !important;
+}
+
+.hero-process-container {
+  position: absolute !important;
+  top: 83% !important;
+  left: 55% !important;
+}
+
+/* Footer font size for all mobile/tablet */
+@media (max-width: 1023px) {
+  .global-footer-text {
+    font-size: 10px !important;
+  }
 }
 
 /* Very small screens override (e.g. iPhone 13 mini) */
@@ -190,7 +216,7 @@
   .hero-work-text {
     font-size: 81px;
   }
-  
+
   .selected-work-title {
     font-size: 56px !important;
   }
