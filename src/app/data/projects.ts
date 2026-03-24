@@ -8,6 +8,8 @@ import studio2 from "../../assets/Scan2026-03-03_102147.png";
 import studio3 from "../../assets/Scan2026-03-03_102317.png";
 import studio4 from "../../assets/Scan2026-03-03_102434.png";
 import studio5 from "../../assets/Screenshot 2026-01-20 at 17.25.45 1.png";
+import studio6 from "../../assets/insights.png";
+import studio7 from "../../assets/scores.png";
 
 // Platform Images
 import platform1 from "../../assets/Platformintegration2.png";
@@ -24,8 +26,8 @@ import process3 from "../../assets/3.svg";
 import process4 from "../../assets/4.svg";
 
 export interface Project {
-  id: string;
-  title: string;
+  id?: string;
+  title?: string;
   client?: string;
   year?: string;
   image?: string;
@@ -41,7 +43,7 @@ export interface Project {
 export const PROJECTS: Project[] = [
   {
     id: "studio-3d-redesign",
-    title: "REDESIGN OF Ax 3D PLATFORM",
+    title: "REDESIGNING A 3D PLATFORM",
     client: "3D PROVIDER",
     year: "2024",
     image: chrome51,
@@ -50,12 +52,19 @@ export const PROJECTS: Project[] = [
     approachIntroduction: "A COMPREHENSIVE REDESIGN OF A 3D creation PLATFORM.",
     approachText:
       "Studio 3D's platform was struggling with poor user engagement and confusing navigation. User research revealed that the existing interface was overwhelming, with critical features buried deep in menus and an inconsistent visual hierarchy that made tasks difficult to complete.",
-    approachImages: [studio1, studio2, studio3, studio4, studio5],
-    extraSections: [],
+    approachImages: [studio1, studio2, studio3, studio4],
+    extraSections: [
+      {
+        title: "THE PROCESS",
+        approachImages: [studio5, studio6, studio7],
+        approachText:
+          "I didn't want to base my design decisions on guesses, so I needed to see how real people were actually struggling with the current site. I used tools like Hotjar to watch session recordings, which showed me the exact moments users got confused or frustrated. I also looked at heatmaps to understand what caught their eye on the page, and crucially, what they were completely ignoring. Seeing this real-world behavior gave me the insight I needed to fix the right problems.",
+      },
+    ],
   },
   {
     id: "platform-redesign",
-    title: "BINKIES PLATFORM",
+    title: "CREATING A VISUAL IDENTITY",
     client: "3D PROVIDER",
     year: "2025",
     image: cube6,
@@ -79,7 +88,8 @@ export const PROJECTS: Project[] = [
         id: "platform-solution",
         title: "THE SOLUTION",
         approachIntroduction: "STREAMLINING THE CORE WORKFLOW",
-        approachText: "By implementing a unified design system, we reduced production time by 40% while maintaining visual consistency across all 3D assets.",
+        approachText:
+          "By implementing a unified design system, we reduced production time by 40% while maintaining visual consistency across all 3D assets.",
       },
     ],
   },

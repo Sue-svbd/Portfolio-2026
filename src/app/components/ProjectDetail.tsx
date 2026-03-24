@@ -194,7 +194,7 @@ export function ProjectDetail() {
 
           {/* Process Images */}
           <div className="col-span-12">
-            <ProjectImages images={project.approachImages} />
+            <ProjectImages images={project.approachImages || []} />
           </div>
         </div>
       </div>
@@ -240,7 +240,7 @@ export function ProjectDetail() {
             {/* Section Images */}
             {section.approachImages && section.approachImages.length > 0 && (
               <div className="col-span-12">
-                <ProjectImages images={section.approachImages} />
+                <ProjectImages images={section.approachImages || []} />
               </div>
             )}
           </div>

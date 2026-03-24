@@ -110,7 +110,7 @@ export function RootLayout() {
             : "fixed top-0 left-0 right-0 py-6 z-[100] bg-white/90 backdrop-blur-sm border-b border-black/5"
         } px-8 transition-colors duration-300 z-[100]`}
       >
-        <div className="max-w-[1800px] w-full mx-auto flex justify-between items-start">
+        <div className="max-w-[1800px] w-full mx-auto flex justify-between items-center md:items-start">
           <div className="flex flex-col gap-1 md:items-start items-center">
             <Link
               to="/"

@@ -31,19 +31,22 @@
   color: #00d9ff;
 }
 
-/* 🔥 TRIGGER ON HOVER */
-.glitch:hover .glitch__layer--1 {
+/* 🔥 TRIGGER ON HOVER OR ACTIVE CLASS */
+.glitch:hover .glitch__layer--1,
+.glitch.is-active .glitch__layer--1 {
   animation: glitchBurst1 0.4s steps(2, end);
   opacity: 1;
 }
 
-.glitch:hover .glitch__layer--2 {
+.glitch:hover .glitch__layer--2,
+.glitch.is-active .glitch__layer--2 {
   animation: glitchBurst2 0.4s steps(2, end);
   opacity: 1;
 }
 
 /* MAIN TEXT SHAKE */
-.glitch:hover .glitch__main {
+.glitch:hover .glitch__main,
+.glitch.is-active .glitch__main {
   animation: glitchMain 0.4s steps(2, end);
 }
 
@@ -120,19 +123,22 @@
 }
 
 .hero:has(.link-work:hover) .hero-graphic,
-.hero-container:has(.link-work:hover) .hero-graphic {
+.hero-container:has(.link-work:hover) .hero-graphic,
+.hero-container:has(.link-work .is-active) .hero-graphic {
   transform: translateX(-12px);
   animation: bgJitter 0.3s steps(2);
 }
 
 .hero:has(.link-about:hover) .hero-graphic,
-.hero-container:has(.link-about:hover) .hero-graphic {
+.hero-container:has(.link-about:hover) .hero-graphic,
+.hero-container:has(.link-about .is-active) .hero-graphic {
   transform: translate(12px, -8px);
   animation: bgJitter 0.3s steps(2);
 }
 
 .hero:has(.link-process:hover) .hero-graphic,
-.hero-container:has(.link-process:hover) .hero-graphic {
+.hero-container:has(.link-process:hover) .hero-graphic,
+.hero-container:has(.link-process .is-active) .hero-graphic {
   transform: translate(12px, 12px);
   animation: bgJitter 0.8s steps(2);
 }

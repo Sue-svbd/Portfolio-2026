@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { ArrowUpRight } from "lucide-react";
 import group4 from "../../assets/Group-4.svg";
@@ -6,6 +6,33 @@ import group4Mobile from "../../assets/Group-4-mobile.svg";
 import { GlitchText } from "./ui/glitch";
 
 export function Home() {
+  const [activeGlitch, setActiveGlitch] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Only on mobile
+    if (window.innerWidth >= 768) return;
+
+    const glitchCycle = () => {
+      const words = ["work", "about", "process"];
+      const randomWord = words[Math.floor(Math.random() * words.length)];
+      
+      setActiveGlitch(randomWord);
+      
+      // Reset after animation ends (0.4s + some buffer)
+      setTimeout(() => {
+        setActiveGlitch(null);
+      }, 1000);
+    };
+
+    // Trigger once immediately
+    glitchCycle();
+
+    // Then every 10 seconds
+    const interval = setInterval(glitchCycle, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="w-full h-full overflow-hidden flex flex-col items-center relative">
       {/* Desktop Layout */}
@@ -59,7 +86,7 @@ export function Home() {
         <div className="absolute right-4 top-0 z-20">
           <Link to="/about" className="hero-link link-about">
             <p className="font-['Zalando_Sans_Expanded',sans-serif] font-semibold text-[48px] text-black tracking-[-3px] cursor-pointer">
-              <GlitchText> ABOUT </GlitchText>
+              <GlitchText isActive={activeGlitch === "about"}> ABOUT </GlitchText>
             </p>
           </Link>
         </div>
@@ -90,7 +117,7 @@ export function Home() {
                     lineHeight: "134.21px",
                   }}
                 >
-                  <GlitchText> WORK</GlitchText>
+                  <GlitchText isActive={activeGlitch === "work"}> WORK</GlitchText>
                 </p>
               </Link>
             </div>
@@ -102,12 +129,12 @@ export function Home() {
             style={{
               position: "absolute",
               top: " 570px",
-              left: "253px",
+              left: "230px",
             }}
           >
             <Link to="/process" className="hero-link link-process">
               <p className="font-['Zalando_Sans_Expanded',sans-serif] font-semibold text-[32px] text-black tracking-[-2px] cursor-pointer uppercase">
-                <GlitchText>PROCESS</GlitchText>
+                <GlitchText isActive={activeGlitch === "process"}>PROCESS</GlitchText>
               </p>
             </Link>
           </div>
