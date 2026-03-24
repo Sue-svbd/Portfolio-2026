@@ -161,11 +161,8 @@
   }
 }
 
-/* Mobile specific styling for Home component */
+/* Mobile/Tablet specific styling for Home component */
 .hero-mobile-graphic {
-  position: absolute;
-  top: -226px;
-  left: 40px;
   width: 100%;
 }
 
@@ -176,23 +173,14 @@
 .hero-work-text {
   font-size: 91px;
   font-weight: 600;
-  line-height: 134.21px;
-}
-
-.hero-process-container {
-  position: absolute;
-  top: 570px;
-  left: 230px;
-  display: flex;
-  justify-content: center;
+  line-height: 1.1;
 }
 
 /* Very small screens override (e.g. iPhone 13 mini) */
 @media (max-width: 375px) {
-  .hero-mobile-graphic {
-    top: -162px;
-    left: 80px;
-    width: 293px;
+  .hero-image-wrapper {
+    width: 293px !important;
+    height: 293px !important;
   }
 
   .hero-about-text {
@@ -202,12 +190,7 @@
   .hero-work-text {
     font-size: 81px;
   }
-
-  .hero-process-container {
-    top: 390px;
-    left: 184px;
-  }
-
+  
   .selected-work-title {
     font-size: 56px !important;
   }
