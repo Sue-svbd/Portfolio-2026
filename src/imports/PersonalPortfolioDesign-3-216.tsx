@@ -295,7 +295,7 @@ function Frame() {
 
 export default function PersonalPortfolioDesign() {
   return (
-    <div className="bg-white relative size-full" data-name="Personal Portfolio Design">
+    <div className="bg-white relative size-full" data-name="Susanna Capacchione - Portfolio">
       <RootLayout />
       <Frame />
     </div>
