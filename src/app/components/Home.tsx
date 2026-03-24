@@ -85,7 +85,7 @@ export function Home() {
         {/* ABOUT - Top Right */}
         <div className="absolute right-4 top-0 z-20">
           <Link to="/about" className="hero-link link-about">
-            <p className="font-['Zalando_Sans_Expanded',sans-serif] font-semibold text-[48px] text-black tracking-[-3px] cursor-pointer">
+            <p className="font-['Zalando_Sans_Expanded',sans-serif] font-semibold text-black tracking-[-3px] cursor-pointer hero-about-text">
               <GlitchText isActive={activeGlitch === "about"}> ABOUT </GlitchText>
             </p>
           </Link>
@@ -98,25 +98,13 @@ export function Home() {
             <img
               src={group4Mobile}
               alt="Mobile Background Graph"
-              className="w-full object-contain hero-graphic"
-              style={{
-                position: "absolute",
-                top: " -226px",
-                left: " 40px",
-              }}
+              className="object-contain hero-graphic hero-mobile-graphic"
             />
 
             {/* WORK - Overlaid on left side of graphic with exact specifications */}
             <div className="absolute left-0 top-1/2 -translate-y-1/2 z-20">
               <Link to="/work" className="hero-link link-work">
-                <p
-                  className="font-['Zalando_Sans_Expanded',sans-serif] text-black cursor-pointer"
-                  style={{
-                    fontSize: "91px",
-                    fontWeight: 600,
-                    lineHeight: "134.21px",
-                  }}
-                >
+                <p className="font-['Zalando_Sans_Expanded',sans-serif] text-black cursor-pointer hero-work-text">
                   <GlitchText isActive={activeGlitch === "work"}> WORK</GlitchText>
                 </p>
               </Link>
@@ -124,14 +112,7 @@ export function Home() {
           </div>
 
           {/* PROCESS - Below graphic */}
-          <div
-            className="flex justify-center"
-            style={{
-              position: "absolute",
-              top: " 570px",
-              left: "230px",
-            }}
-          >
+          <div className="hero-process-container">
             <Link to="/process" className="hero-link link-process">
               <p className="font-['Zalando_Sans_Expanded',sans-serif] font-semibold text-[32px] text-black tracking-[-2px] cursor-pointer uppercase">
                 <GlitchText isActive={activeGlitch === "process"}>PROCESS</GlitchText>
@@ -144,12 +125,12 @@ export function Home() {
         <div className="pb-8 flex justify-center">
           <a
             href="mailto:susannacapacchione@gmail.com"
-            className="flex items-center justify-center gap-2 text-[14px] font-medium tracking-[0.55px] border border-black px-6 py-2.5 hover:bg-black hover:text-white transition-all duration-300 group"
+            className="flex items-center justify-center gap-2 text-[14px] font-medium tracking-[0.55px] border border-black px-6 py-2.5 hover:bg-black hover:text-white transition-all duration-300 group contact-button"
           >
             CONTACT{" "}
             <ArrowUpRight
               size={16}
-              className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+              className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform contact-button-icon"
             />
           </a>
         </div>

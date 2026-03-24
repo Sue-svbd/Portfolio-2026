@@ -133,12 +133,12 @@ export function Work() {
     <div className="min-h-screen px-8 pt-10 pb-20 overflow-x-hidden">
       <div className="max-w-[1800px] mx-auto">
         {/* Header */}
-        <div className="mb-40">
+        <div className="mb-40 selected-work-container">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="font-['Zalando_Sans_Expanded',sans-serif] font-bold text-[74px] lg:text-[176px] leading-[0.7] tracking-tighter mb-8 uppercase"
+            className="font-['Zalando_Sans_Expanded',sans-serif] font-bold text-[74px] lg:text-[176px] leading-[0.7] tracking-tighter mb-8 uppercase selected-work-title"
           >
             SELECTED <br /> WORK
           </motion.h1>

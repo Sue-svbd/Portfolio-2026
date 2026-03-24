@@ -149,12 +149,12 @@ export function RootLayout() {
             {/* Desktop Contact Button */}
             <a
               href="mailto:susannacapacchione@gmail.com"
-              className="hidden md:flex items-center gap-2 text-[14px] font-medium tracking-[0.55px] border border-black px-6 py-2.5 hover:bg-black hover:text-white transition-all duration-300 group"
+              className="hidden md:flex items-center gap-2 text-[14px] font-medium tracking-[0.55px] border border-black px-6 py-2.5 hover:bg-black hover:text-white transition-all duration-300 group contact-button"
             >
               CONTACT{" "}
               <ArrowUpRight
                 size={16}
-                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform contact-button-icon"
               />
             </a>
 
@@ -251,7 +251,7 @@ export function RootLayout() {
       <footer
         className={`${isHome ? "h-[10vh] flex items-center" : "py-12"} px-8 border-t border-black/10`}
       >
-        <div className="max-w-[1800px] w-full mx-auto flex justify-between items-center text-xs opacity-50">
+        <div className="max-w-[1800px] w-full mx-auto flex justify-between items-center text-xs opacity-50 global-footer-text">
           <p>© 2026 SUSANNA CAPACCHIONE. ALL RIGHTS RESERVED.</p>
           <p className="tracking-widest">AVAILABLE FOR COLLABORATION</p>
         </div>
