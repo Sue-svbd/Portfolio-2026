@@ -7,27 +7,51 @@ import { ArrowLeft } from "lucide-react";
 import AutoScroll from "embla-carousel-auto-scroll";
 import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel";
 
-function ProjectImages({ images }: { images: string[] }) {
-  const useCarousel = images.length > 3;
+function ProjectImages({ images, mobileImages }: { images: string[], mobileImages?: string[] }) {
+  const displayImages = images;
+  const displayImagesMobile = mobileImages && mobileImages.length === images.length ? mobileImages : images;
+
+  // Reduced heights: 500px for desktop, 400px for mobile
+  const desktopHeight = "h-[500px]";
+  const mobileHeight = "h-[400px]";
 
   return (
     <>
-      {/* Mobile Stack */}
-      <div className="flex flex-col gap-8 md:hidden">
-        {images.map((img, i) => (
-          <div key={i} className="w-full rounded-[10px] overflow-hidden shadow-md">
-            <FigmaImage
-              src={img}
-              alt={`Step ${i + 1}`}
-              className="w-full h-auto object-cover"
-            />
-          </div>
-        ))}
+      {/* Mobile Carousel - Always a carousel on mobile for "neverending" feel */}
+      <div className="md:hidden">
+        <Carousel
+          plugins={[
+            AutoScroll({
+              speed: 1,
+              stopOnInteraction: false,
+              stopOnMouseEnter: false,
+            }),
+          ]}
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-4">
+            {displayImagesMobile.map((img, i) => (
+              <CarouselItem key={i} className="pl-4 basis-auto">
+                <div className={`w-[300px] ${mobileHeight} rounded-[10px] overflow-hidden`}>
+                  <FigmaImage
+                    src={img}
+                    alt={`Step ${i + 1}`}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
       </div>
 
       {/* Desktop Layout (Carousel or Grid) */}
       <div className="hidden md:block">
-        {useCarousel ? (
+        {displayImages.length > 3 ? (
           <Carousel
             plugins={[
               AutoScroll({
@@ -43,20 +67,20 @@ function ProjectImages({ images }: { images: string[] }) {
             className="w-full"
           >
             <CarouselContent className="-ml-8">
-              {images.map((img, i) => (
+              {displayImages.map((img, i) => (
                 <CarouselItem key={i} className="pl-8 basis-auto">
                   <FigmaImage
                     src={img}
                     alt={`Step ${i + 1}`}
-                    className="h-[600px] w-auto object-contain block"
+                    className={`${desktopHeight} w-auto object-contain block`}
                   />
                 </CarouselItem>
               ))}
             </CarouselContent>
           </Carousel>
         ) : (
-          <div className="flex flex-col md:flex-row gap-12 items-end">
-            {images.map((img, i) => {
+          <div className="flex flex-col md:flex-row gap-12 items-center">
+            {displayImages.map((img, i) => {
               const imgRef = useRef(null);
               const { scrollYProgress: imgScroll } = useScroll({
                 target: imgRef,
@@ -71,14 +95,12 @@ function ProjectImages({ images }: { images: string[] }) {
                   key={i}
                   ref={imgRef}
                   style={{ y }}
-                  className={`flex-1 relative overflow-hidden transition-all duration-500
-                    ${isFirst ? "rounded-[5px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]" : "rounded-[13px] shadow-[0px_4px_12px_0px_rgba(0,0,0,0.25)]"}
-                  `}
+                  className={`flex-1 ${desktopHeight} relative overflow-hidden transition-all duration-500 rounded-[13px]`}
                 >
                   <FigmaImage
                     src={img}
                     alt={`Step ${i + 1}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                   />
                 </motion.div>
               );
@@ -160,7 +182,7 @@ export function ProjectDetail() {
           className="w-full h-full md:max-w-[1500px] relative"
         >
           <FigmaImage
-            src={project.image}
+            src={window.innerWidth < 768 && project.mobileImage ? project.mobileImage : project.image}
             alt={project.title}
             className="w-full h-full object-cover"
           />
@@ -194,7 +216,7 @@ export function ProjectDetail() {
 
           {/* Process Images */}
           <div className="col-span-12">
-            <ProjectImages images={project.approachImages || []} />
+            <ProjectImages images={project.approachImages || []} mobileImages={project.mobileApproachImages} />
           </div>
         </div>
       </div>
@@ -240,7 +262,7 @@ export function ProjectDetail() {
             {/* Section Images */}
             {section.approachImages && section.approachImages.length > 0 && (
               <div className="col-span-12">
-                <ProjectImages images={section.approachImages || []} />
+                <ProjectImages images={section.approachImages || []} mobileImages={section.mobileApproachImages} />
               </div>
             )}
           </div>

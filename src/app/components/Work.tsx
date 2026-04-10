@@ -6,33 +6,33 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 const LAYOUT_CLASSES = [
   {
-    wrapper: "lg:col-span-8 lg:col-start-2",
+    wrapper: "lg:col-span-10 lg:col-start-2",
     image: "lg:h-[500px]",
     align: "lg:self-start",
     marginTop: "lg:mt-0",
   },
   {
     wrapper: "lg:col-span-10 lg:col-start-14",
-    image: "lg:h-[600px]",
-    align: "lg:self-center",
+    image: "lg:h-[500px]",
+    align: "lg:self-start",
     marginTop: "lg:mt-40",
   },
   {
-    wrapper: "lg:col-span-7 lg:col-start-4",
-    image: "lg:h-[450px]",
-    align: "lg:self-end",
+    wrapper: "lg:col-span-10 lg:col-start-2",
+    image: "lg:h-[500px]",
+    align: "lg:self-start",
     marginTop: "lg:mt-20",
   },
   {
-    wrapper: "lg:col-span-9 lg:col-start-12",
-    image: "lg:h-[550px]",
+    wrapper: "lg:col-span-10 lg:col-start-14",
+    image: "lg:h-[500px]",
     align: "lg:self-start",
     marginTop: "lg:mt-0",
   },
   {
-    wrapper: "lg:col-span-11 lg:col-start-2",
-    image: "lg:h-[650px]",
-    align: "lg:self-center",
+    wrapper: "lg:col-span-10 lg:col-start-2",
+    image: "lg:h-[500px]",
+    align: "lg:self-start",
     marginTop: "lg:mt-32",
   },
 ];
@@ -81,7 +81,7 @@ function ProjectCard({
 
       {/* Image Container */}
       <div
-        className={`bg-black/5 overflow-hidden mb-10 relative ${layout.image}`}
+        className={`overflow-hidden mb-10 relative ${layout.image}`}
       >
         <motion.div
           layoutId={project.isComingSoon ? undefined : `project-image-${project.id}`}
@@ -91,7 +91,7 @@ function ProjectCard({
           <ImageWithFallback
             src={project.image}
             alt={project.title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
           />
         </motion.div>
 
