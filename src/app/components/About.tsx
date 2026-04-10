@@ -60,9 +60,10 @@ export function About() {
             className="font-['Inter',sans-serif] text-xs leading-relaxed text-black tracking-tight uppercase"
           >
             I’m Susanna, I’m Italian and I don’t like tomatoes. I like to think
-            of myself as a curious and creative person. I like to constantly
-            learn, and if I’m passionate about something, I’ll go ballistic
-            about it.
+            of myself as a curious and creative person. I approach everything
+            with an open mind and allow myself to explore and experiment. I'm
+            skilled in design, but I can also code when needed, a nod to my days
+            as a front-end developer.
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -71,11 +72,13 @@ export function About() {
             transition={{ delay: 0.2 }}
             className="font-['Inter',sans-serif] text-xs leading-relaxed text-black tracking-tight uppercase"
           >
-            I like to create clean interfaces and pleasant aesthetics.
+            I like to create clean interfaces and pleasant aesthetics. I'm eager
+            to work with other creatives and like-minded people who are 'all in'
+            when it comes to create some weird and beautiful things.
           </motion.p>
         </div>
 
-  <div className="text-center py-32">
+        <div className="text-center py-32">
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 0.7 }}
@@ -92,7 +95,6 @@ export function About() {
             LET'S TALK
           </motion.a>
         </div>
-
       </div>
     </div>
   );
