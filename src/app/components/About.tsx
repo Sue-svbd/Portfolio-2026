@@ -76,6 +76,24 @@ export function About() {
             to work with other creatives and like-minded people who are 'all in'
             when it comes to create some weird and beautiful things.
           </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 0.7, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="font-['Inter',sans-serif] text-xs leading-relaxed text-black tracking-tight uppercase"
+          >
+            Sometimes I make{" "}
+            <a
+              href="https://soundcloud.com/zasuelich"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#6951ff] underline hover:opacity-70 transition-opacity"
+            >
+              music
+            </a>{" "}
+            too.
+          </motion.p>
         </div>
 
         <div className="text-center py-32">
