@@ -190,49 +190,51 @@ export function ProjectDetail() {
       </div>
 
       {/* My Approach Section */}
-      <div className="max-w-[1800px] mx-auto px-6 md:px-8 pt-24 md:pt-60 pb-20 md:pb-40">
-        <div className="grid grid-cols-12 gap-8 md:gap-12 relative">
-          {/* Approach Introduction & Large Title */}
-          <div className="col-span-12 mb-16 md:mb-32">
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 0.5 }}
-              viewport={{ once: true }}
-              className="text-[10px] md:text-xs tracking-[2px] md:tracking-[3px] font-bold mb-8 md:mb-12 uppercase max-w-[400px] md:ml-[410px]"
-            >
-              {project.approachIntroduction}
-            </motion.p>
-            <h2 className="font-['Zalando_Sans_Expanded',sans-serif] font-semibold text-[40px] md:text-[128px] leading-[1] md:leading-[0.8] tracking-[-1px] md:tracking-[-4.8px] uppercase">
-              MY <br className="hidden md:block" /> <span className="md:ml-[410px]">APPROACH</span>
-            </h2>
-          </div>
+      {project.id !== "personal-portfolio" && (
+        <div className="max-w-[1800px] mx-auto px-6 md:px-8 pt-12 md:pt-20 pb-8 md:pb-12">
+          <div className="grid grid-cols-12 gap-8 md:gap-12 relative">
+            {/* Approach Introduction & Large Title */}
+            <div className="col-span-12 mb-6 md:mb-10">
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 0.5 }}
+                viewport={{ once: true }}
+                className="text-[10px] md:text-xs tracking-[2px] md:tracking-[3px] font-bold mb-4 md:mb-6 uppercase max-w-[400px] md:ml-[410px]"
+              >
+                {project.approachIntroduction}
+              </motion.p>
+              <h2 className="font-['Zalando_Sans_Expanded',sans-serif] font-semibold text-[40px] md:text-[128px] leading-[1] md:leading-[0.8] tracking-[-1px] md:tracking-[-4.8px] uppercase">
+                MY <br className="hidden md:block" /> <span className="md:ml-[410px]">APPROACH</span>
+              </h2>
+            </div>
 
-          {/* Description Text */}
-          <div className="col-span-12 md:col-span-8 lg:col-span-7 md:col-start-2 lg:col-start-2 mb-12 md:mb-20">
-            <p className="text-[16px] md:text-[18px] leading-[1.6] text-black opacity-70 tracking-[-0.2px] md:tracking-[-0.44px] font-normal">
-              {project.approachText}
-            </p>
-          </div>
+            {/* Description Text */}
+            <div className="col-span-12 md:col-span-8 lg:col-span-7 md:col-start-2 lg:col-start-2 mb-6 md:mb-8">
+              <p className="text-[16px] md:text-[18px] leading-[1.6] text-black opacity-70 tracking-[-0.2px] md:tracking-[-0.44px] font-normal">
+                {project.approachText}
+              </p>
+            </div>
 
-          {/* Process Images */}
-          <div className="col-span-12">
-            <ProjectImages images={project.approachImages || []} mobileImages={project.mobileApproachImages} />
+            {/* Process Images */}
+            <div className="col-span-12">
+              <ProjectImages images={project.approachImages || []} mobileImages={project.mobileApproachImages} />
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Extra Sections */}
       {project.extraSections?.map((section, sectionIdx) => (
-        <div key={sectionIdx} className="max-w-[1800px] mx-auto px-6 md:px-8 py-20 md:py-40 border-t border-black/5">
+        <div key={sectionIdx} className="max-w-[1800px] mx-auto px-6 md:px-8 py-8 md:py-12 border-t border-black/5">
           <div className="grid grid-cols-12 gap-8 md:gap-12 relative">
             {/* Section Introduction & Large Title */}
-            <div className="col-span-12 mb-16 md:mb-32">
+            <div className="col-span-12 mb-6 md:mb-10">
               {section.approachIntroduction && (
                 <motion.p
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 0.5 }}
                   viewport={{ once: true }}
-                  className="text-[10px] md:text-xs tracking-[2px] md:tracking-[3px] font-bold mb-8 md:mb-12 uppercase max-w-[400px] md:ml-[410px]"
+                  className="text-[10px] md:text-xs tracking-[2px] md:tracking-[3px] font-bold mb-4 md:mb-6 uppercase max-w-[400px] md:ml-[410px]"
                 >
                   {section.approachIntroduction}
                 </motion.p>
@@ -252,7 +254,7 @@ export function ProjectDetail() {
 
             {/* Description Text */}
             {section.approachText && (
-              <div className="col-span-12 md:col-span-8 lg:col-span-7 md:col-start-2 lg:col-start-2 mb-12 md:mb-20">
+              <div className="col-span-12 md:col-span-8 lg:col-span-7 md:col-start-2 lg:col-start-2 mb-6 md:mb-8">
                 <p className="text-[16px] md:text-[18px] leading-[1.6] text-black opacity-70 tracking-[-0.2px] md:tracking-[-0.44px] font-normal">
                   {section.approachText}
                 </p>
@@ -270,7 +272,7 @@ export function ProjectDetail() {
       ))}
 
       {/* Project Navigation / Footer */}
-      <div className="py-60 border-t border-black/5 text-center px-8">
+      <div className="py-20 border-t border-black/5 text-center px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -27,13 +27,33 @@ import studio2Mobile from "../../assets/mobile-Scan2026-03-03_102147.png";
 import studio3Mobile from "../../assets/mobile-Scan2026-03-03_102317.png";
 import studio4Mobile from "../../assets/mobile-Scan2026-03-03_102434.png";
 
-// Platform Images
-import platform1 from "../../assets/Platformintegration2.png";
-import platform2 from "../../assets/Platformintegration3.png";
-import platform3 from "../../assets/platfintegr4.png";
-import platform4 from "../../assets/platforeditor1.png";
-import platform5 from "../../assets/platform1.png";
-import platform6 from "../../assets/platftorm integration31.png";
+import visualguide from "../../assets/visualIdentity1.png";
+import visualguide2 from "../../assets/visualIdentity2.png";
+import visualguide3 from "../../assets/visualIdentity3.png";
+import visualguide4 from "../../assets/visualIdentity4.png";
+import visualguide5 from "../../assets/visualIdentity5.png";
+import visualguide6 from "../../assets/visualIdentity6.png";
+import visualguideslide1 from "../../assets/1.png";
+import visualguideslide2 from "../../assets/2.png";
+import visualguideslide3 from "../../assets/3.png";
+import visualguideslide4 from "../../assets/4.png";
+import visualguideslide5 from "../../assets/5.png";
+import visualguideslide6 from "../../assets/6.png";
+import visualguideslide7 from "../../assets/7.png";
+import visualguideslide8 from "../../assets/8.png";
+import visualguideslide9 from "../../assets/9.png";
+import visualguideslide10 from "../../assets/10.png";
+import visualguideslide11 from "../../assets/11.png";
+import visualguideslide12 from "../../assets/12.png";
+import visualguideslide13 from "../../assets/13.png";
+import visualguideslide14 from "../../assets/14.png";
+import visualguideslide15 from "../../assets/15.png";
+import visualguideslide16 from "../../assets/16.png";
+import visualguideslide17 from "../../assets/17.png";
+import visualguideslide18 from "../../assets/18.png";
+import visualguideslide19 from "../../assets/19.png";
+import visualguideslide20 from "../../assets/20.png";
+import visualguideslide21 from "../../assets/21.png";
 
 // Approach images placeholders for other projects
 import process1 from "../../assets/1.svg";
@@ -115,32 +135,58 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "platform-redesign",
-    title: "CREATING A VISUAL IDENTITY",
+    title: "Creating a Cohesive Visual System",
     client: "3D PROVIDER",
     year: "2025",
     image: cube6,
     category: "UI/UX",
     description:
       "Bringing the company's scattered services into one platform was as much a human challenge as it was a design challenge.",
-    approachIntroduction:
-      "Creating A Unified Platform for a Fragmented Digital Ecosystem",
+    approachIntroduction: "Building a visual identity from scratch",
     approachText:
-      "I get all the teams on the same page first, figuring out exactly what everyone needed. Starting from scratch, I ditch scattered setups and built a flexible, modular system of reusable components. This let me design one seamless platform—including a dedicated management dashboard for the business customers—without building a clunky monolith. Finally, I tied it all together by baking a fresh new branding right into the UI.",
-    approachImages: [
-      platform1,
-      platform2,
-      platform3,
-      platform4,
-      platform5,
-      platform6,
-    ],
+      "Studio 3D is an innovative platform empowering users to create and build with 3D models. As the platform grew, it became clear that a comprehensive style guide was needed to ensure visual consistency across both the user interface and marketing materials. I was tasked with creating this complete style guide from the ground up. My goal was to define everything from fundamental color palettes and typography to component libraries, creating a living single source of truth for all design decisions. ",
     extraSections: [
       {
+        approachImages: [
+          visualguide,
+          visualguide2,
+          visualguide3,
+          visualguide4,
+          visualguide5,
+          visualguide6,
+        ],
+
         id: "platform-solution",
-        title: "THE SOLUTION",
-        approachIntroduction: "STREAMLINING THE CORE WORKFLOW",
         approachText:
-          "By implementing a unified design system, we reduced production time by 40% while maintaining visual consistency across all 3D assets.",
+          "I audited the visual elements of the platform, particularly focusing on colors, layout, typografy and basing my observations on color theory and foundations of visual harmony and hierarchy. Using low-fidelity mockups as a canvas, I then experimented with various color applications.",
+      },
+      {
+        title: "Final result",
+        approachText:
+          "A unified visual design language for Studio 3D, documented in a style guide applicable to every interface element.",
+        approachImages: [
+          visualguideslide1,
+          visualguideslide2,
+          visualguideslide3,
+          visualguideslide4,
+          visualguideslide5,
+          visualguideslide6,
+          visualguideslide5,
+          visualguideslide8,
+          visualguideslide9,
+          visualguideslide10,
+          visualguideslide11,
+          visualguideslide12,
+          visualguideslide13,
+          visualguideslide14,
+          visualguideslide15,
+          visualguideslide16,
+          visualguideslide17,
+          visualguideslide18,
+          visualguideslide19,
+          visualguideslide20,
+          visualguideslide21,
+        ],
       },
     ],
   },
@@ -150,15 +196,14 @@ export const PROJECTS: Project[] = [
     client: "Visual Artist",
     year: "2026",
     image: group134,
+    approachIntroduction: "Work in progress",
     category: "UI/UX",
-    description:
-      "Reimagining the fintech experience for a younger demographic, focusing on transparency and ease of use.",
-    approachIntroduction:
-      "BUILDING TRUST THROUGH HUMAN-CENTRIC DESIGN PRINCIPLES.",
-    approachText:
-      "The core challenge was trust. I used a warm color palette and friendly micro-interactions to make financial management feel less intimidating and more human.",
-    approachImages: [process3, process1, process2, process4],
-    extraSections: [],
+    description: "Work in progress",
     isComingSoon: true,
+    extraSections: [
+      {
+        approachIntroduction: "Work in progress",
+      },
+    ],
   },
 ];
