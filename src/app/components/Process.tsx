@@ -36,20 +36,20 @@ function ProcessStep({ step, index }: { step: any; index: number }) {
   const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
   const imageY = useTransform(scrollYProgress, [0, 1], [-20, 20]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  
+
   // New: Active state transforms based on scroll
   // Background color transitions to purple when in the middle of the screen
   const bgColor = useTransform(
     scrollYProgress,
     [0.3, 0.45, 0.55, 0.7],
-    ["#000000", "#614DD5", "#614DD5", "#000000"]
+    ["#000000", "#614DD5", "#614DD5", "#000000"],
   );
 
   // Subtle scale up when active
   const activeScale = useTransform(
     scrollYProgress,
     [0.3, 0.5, 0.7],
-    [1, 1.05, 1]
+    [1, 1.05, 1],
   );
 
   const isEven = index % 2 === 0;
@@ -61,7 +61,9 @@ function ProcessStep({ step, index }: { step: any; index: number }) {
       className="grid grid-cols-12 gap-4 lg:gap-12 items-center"
     >
       {/* Image Container */}
-      <div className={`col-span-5 lg:col-span-6 ${isEven ? "order-1 -ml-16 lg:ml-0" : "order-2 -mr-16 lg:mr-0"}`}>
+      <div
+        className={`col-span-5 lg:col-span-6 ${isEven ? "order-1 -ml-16 lg:ml-0" : "order-2 -mr-16 lg:mr-0"}`}
+      >
         <div className="relative group overflow-hidden bg-black">
           <motion.div
             style={{ y: imageY, scale: activeScale }}
@@ -91,12 +93,25 @@ function ProcessStep({ step, index }: { step: any; index: number }) {
       </div>
 
       {/* Content */}
-      <div className={`col-span-7 lg:col-span-6 ${isEven ? "order-2" : "order-1"}`}>
-        <motion.div style={{ y }} className={`space-y-4 lg:space-y-6 ${isEven ? "" : "text-right lg:text-left"}`}>
-          <h2 className="text-3xl lg:text-4xl tracking-tight uppercase font-bold leading-[1.1]">{step.title}</h2>
-          <div className={`flex items-center gap-4 pt-2 lg:pt-4 ${isEven ? "" : "justify-end lg:justify-start"}`}>
-            <div className={`w-8 lg:w-12 h-0.5 bg-black ${isEven ? "order-1" : "order-2"}`}></div>
-            <p className={`text-[10px] lg:text-sm tracking-widest opacity-50 font-medium ${isEven ? "order-2" : "order-1"}`}>
+      <div
+        className={`col-span-7 lg:col-span-6 ${isEven ? "order-2" : "order-1"}`}
+      >
+        <motion.div
+          style={{ y }}
+          className={`space-y-4 lg:space-y-6 ${isEven ? "" : "text-right lg:text-left"}`}
+        >
+          <h2 className="text-3xl lg:text-4xl tracking-tight uppercase font-bold leading-[1.1]">
+            {step.title}
+          </h2>
+          <div
+            className={`flex items-center gap-4 pt-2 lg:pt-4 ${isEven ? "" : "justify-end lg:justify-start"}`}
+          >
+            <div
+              className={`w-8 lg:w-12 h-0.5 bg-black ${isEven ? "order-1" : "order-2"}`}
+            ></div>
+            <p
+              className={`text-[10px] lg:text-sm tracking-widest opacity-50 font-medium ${isEven ? "order-2" : "order-1"}`}
+            >
               STEP {step.number}
             </p>
           </div>
@@ -148,7 +163,10 @@ export function Process() {
   ];
 
   return (
-    <div ref={containerRef} className="min-h-screen px-8 pt-10 pb-20 overflow-x-hidden">
+    <div
+      ref={containerRef}
+      className="min-h-screen px-8 pt-10 pb-20 overflow-x-hidden"
+    >
       <div className="max-w-[1800px] mx-auto">
         {/* Header */}
         <div className="mb-20">
@@ -176,7 +194,7 @@ export function Process() {
         </div>
 
         {/* Philosophy Section */}
-        <div className="mt-40 py-20 border-t border-black/10">
+        {/* <div className="mt-40 py-20 border-t border-black/10">
           <div className="grid grid-cols-2 gap-16">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -203,10 +221,9 @@ export function Process() {
               </h3>
               <div className="space-y-3">
                 {[
-                  "SIMPLICITY IS SOPHISTICATION",
+                  "SIMPLE IS BETTER",
                   "FORM FOLLOWS FUNCTION",
                   "DETAILS MAKE THE DIFFERENCE",
-                  "DESIGN FOR EVERYONE",
                 ].map((principle) => (
                   <p
                     key={principle}
@@ -218,7 +235,7 @@ export function Process() {
               </div>
             </motion.div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
