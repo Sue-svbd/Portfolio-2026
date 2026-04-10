@@ -192,7 +192,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "personal-portfolio",
-    title: "ARTIST PORTFOLIO",
+    title: "RETHINKING AN ARTIST PORTFOLIO",
     client: "Visual Artist",
     year: "2026",
     image: group134,
