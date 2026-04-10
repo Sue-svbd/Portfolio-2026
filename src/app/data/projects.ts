@@ -110,7 +110,7 @@ export const PROJECTS: Project[] = [
           studio11,
         ],
         approachText:
-          "Before getting starting getting my hands dirty with design, I focused on the information structure of the platform, and I tried reorganising it in a more logic way. I like to start by getting messy ideas out of my head quickly using just pen and paper so that can iterate quickly. Once those rough concepts felt solid, I moved them into Figma to build clickable prototypes. This step was vital because it allowed users to actually interact with the design and test if the flow felt right before spending time on the final polish.",
+          "Before getting my hands dirty with design, I focused on the information structure of the platform, and I tried reorganising it in a more logic way. I like to start by getting messy ideas out of my head quickly using just pen and paper so that can iterate quickly. Once those rough concepts felt solid, I moved them into Figma to build clickable prototypes. This step was vital because it allowed users to actually interact with the design and test if the flow felt right before spending time on the final polish.",
       },
       {
         approachImages: [
