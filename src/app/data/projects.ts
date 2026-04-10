@@ -129,7 +129,7 @@ export const PROJECTS: Project[] = [
         approachImages: [studioResults, studioResults2],
         title: "Final results",
         approachText:
-          "The results were pretty obvious by a first glance at the analytics afterthe release of the mobile version: users were not leaving the page anymore and the total number of users landing on Studio grew exponentially.",
+          "The analytics following the mobile release were immediately clear: bounce rates plummeted, and the total number of users landing on Studio grew exponentially.",
       },
     ],
   },
